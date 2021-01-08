@@ -1,0 +1,3 @@
+[submodule "kiwiirc"]
+	path = kiwiirc
+	url = https://github.com/kiwiirc/kiwiirc

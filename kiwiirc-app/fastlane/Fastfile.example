@@ -1,0 +1,157 @@
+fastlane_version '2.53.1'
+
+generated_fastfile_id "df5cf63c-928a-457d-a894-d39af2d84e9b"
+
+default_platform(:ios)
+
+lane :print_version_type do
+    ENV["TAG"] = ENV["TAG"]? ENV["TAG"] : ""
+    print "version alpha: "
+    print ENV["TAG"].end_with? '-alpha'
+    print " beta: "
+    print ENV["TAG"].end_with? '-beta'
+end
+
+platform :ios do
+  # iOS Lanes
+
+  private_lane :setup_project do
+    if is_ci?
+      create_keychain(
+        name: "actiontest_keychain",
+        password: "meow",
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+      )
+    end
+  end
+
+  desc 'Fetch certificates and provisioning profiles'
+  lane :certificates do
+    unless is_ci?
+      match(
+        type: "development",
+        readonly: is_ci,
+        keychain_name:  is_ci? ? "actiontest_keychain" : nil,
+        keychain_password: is_ci? ? "meow" : nil
+      )
+    end
+
+    match(
+      type: "appstore",
+      readonly: is_ci,
+      keychain_name:  is_ci? ? "actiontest_keychain" : nil,
+      keychain_password: is_ci? ? "meow" : nil
+    )
+    # match(type: "adhoc")
+  end
+
+  desc 'Build the iOS application.'
+  lane :build do
+    setup_project
+
+    # sh("tns", "prepare", "ios", "--bundle", "--release", "--clean", "--env.production")
+    unless is_ci?
+      sh("tns", "prepare", "ios", "--bundle", "--release", "--clean", "--env.production")
+    end
+
+    certificates
+
+    build_app(
+      scheme: "mobile",
+      workspace: './platforms/ios/mobile.xcworkspace',
+      configuration: "Release",
+      export_method: "app-store",
+      export_team_id: ENV["TEAM_ID"],
+      skip_codesigning: true,
+      include_bitcode: true,
+    )
+
+    print ({
+      signing_identity: ENV["SIGNING_IDENTITY"],
+      provisioning_profile: {
+        'env_path': "sigh_" + ENV["APP_IDENTIFIER"] + "_appstore_profile-path",
+        ENV["APP_IDENTIFIER"] => ENV["sigh_" + ENV["APP_IDENTIFIER"] + "_appstore_profile-path"],
+      }
+    })
+
+    resign(
+      ipa: "./mobile.ipa",
+      signing_identity: ENV["SIGNING_IDENTITY"],
+      provisioning_profile: {
+        ENV["APP_IDENTIFIER"] => ENV["sigh_" + ENV["APP_IDENTIFIER"] + "_appstore_profile-path"],
+      }
+    )
+  end
+
+  desc 'Upload dSYMs to Crashlytics.'
+  lane :upload_dsyms do 
+    upload_symbols_to_crashlytics(
+      binary_path: "./platforms/ios/Pods/Fabric/upload-symbols",
+      dsym_path: "./mobile.app.dSYM.zip",
+      gsp_path: "./platforms/ios/mobile/Resources/GoogleService-Info.plist"
+    )
+  end
+
+  desc 'Ship to Testflight.'
+  lane :ship_testflight do
+    alpha_groups = ENV["ALPHA_GROUPS"].split(' ');
+    beta_groups = ENV["BETA_GROUPS"].split(' ');
+    print_version_type
+
+    build
+
+    upload_to_testflight(
+      beta_app_feedback_email: ENV["BETA_APP_FEEDBACK_EMAIL"],
+      beta_app_description: ENV["BETA_APP_DESCRIPTION"],
+      demo_account_required: true,
+      distribute_external: true,
+      groups: (ENV["TAG"].end_with? '-beta') ? beta_groups : alpha_groups,
+      notify_external_testers: true,
+      changelog: File.read("./metadata/ios/en-US/release_notes.txt"),
+      beta_app_review_info: {
+        contact_email: ENV["CONTACT_EMAIL"],
+        contact_first_name: ENV["CONTACT_FIRST_NAME"],
+        contact_last_name: ENV["CONTACT_LAST_NAME"],
+        contact_phone: ENV["CONTACT_PHONE"],
+        demo_account_name: ENV["DEMO_ACCOUNT_NAME"],
+        demo_account_password: ENV["DEMO_ACCOUNT_PASSWORD"],
+        notes: ENV["NOTES"]
+      },
+    )
+
+    upload_dsyms
+  end
+
+end
+
+platform :android do
+  # Android Lanes
+
+  desc 'Build the Android application.'
+  lane :build do
+    sh("tns", "build", "android", "--bundle", "--release", "--clean", "--env.production",
+      "--key-store-path", Dir.pwd + "/keys/mobile.keystore",
+      "--key-store-password", ENV["KEYSTORE_PASSWORD"],
+      "--key-store-alias", ENV["KEYSTORE_ALIAS"],
+      "--key-store-alias-password", ENV["KEYSTORE_ALIAS_PASSWORD"]
+    )
+  end
+
+  desc 'Ship to Playstore.'
+  lane :ship_playstore do
+    print_version_type
+
+    build
+
+    upload_to_play_store(
+      track: (ENV["TAG"].end_with? '-beta') ? 'beta' : 'alpha',
+      track_promote_to: 'beta',
+      json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],
+      apk: './platforms/android/app/build/outputs/apk/release/app-release.apk'
+    )
+  end
+
+end

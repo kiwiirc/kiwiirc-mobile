@@ -1,0 +1,54 @@
+.ns-root,
+.ns-modal {
+    /* PALETTE */
+    --primary1: #42b992;
+    --primary2: #359475;
+    --primary3: #286f58;
+    --primary4: #1a4a3a;
+    --primary5: #0d251d;
+    --neutral1: #f8fafb;
+    --neutral2: #d9e4ec;
+    --neutral3: #9db1c7;
+    --neutral4: #5f748c;
+    --neutral5: #34383a;
+    --accent1: #c07bcf;
+    --accent2: #b769c8;
+    --accent3: #a543ba;
+    --accent4: #843695;
+    --accent5: #53225d;
+    --accentstrong1: #f5d494;
+    --accentstrong2: #e8b44e;
+    --accentstrong3: #e09f20;
+    --accentstrong4: #bc8721;
+    --accentstrong5: #8d6821;
+    --success1: #ddca98;
+    --success2: #cfb46e;
+    --success3: #ba9430;
+    --success4: #957626;
+    --success5: #70591d;
+    --info1: #a8dcce;
+    --info2: #65d6ad;
+    --info3: #199473;
+    --info4: #188669;
+    --info5: #16755b;
+    --warning1: #fffdf3;
+    --warning2: #fcf7d7;
+    --warning3: #f3d460;
+    --warning4: #c9ae37;
+    --warning5: #5c4c0f;
+    --error1: #ff8c65;
+    --error2: #f78d8d;
+    --error3: #fd4202;
+    --error4: #c53200;
+    --error5: #9b2800;
+    --actiondanger1: #ff8c65;
+    --actiondanger2: #f78d8d;
+    --actiondanger3: #fd4202;
+    --actiondanger4: #c53200;
+    --actiondanger5: #9b2800;
+    --actiongo1: #a8dcce;
+    --actiongo2: #65d6ad;
+    --actiongo3: #199473;
+    --actiongo4: #188669;
+    --actiongo5: #16755b;
+}

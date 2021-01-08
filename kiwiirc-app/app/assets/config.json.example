@@ -1,0 +1,32 @@
+{
+    "windowTitle": "Kiwi IRC - The mobile IRC client",
+    "startupScreen": "kiwiBnc",
+    "kiwiServer": "https://localdev.clients.kiwiirc.com/webirc/kiwiirc/",
+    "appSettings": {
+        "appID": "com.kiwiirc.ircclient",
+        "appVersion": "0.2.0",
+        "configUrl": "https://kiwiirc.com/svs/app/config/"
+    },
+    "restricted": true,
+    "theme": "Default",
+    "themes": [
+        {
+            "name": "Default",
+            "url": "assets/themes/default.css"
+        }
+    ],
+    "startupOptions": {
+        "server": "bnc.kiwiirc.com",
+        "port": 443,
+        "tls": true,
+        "path": "/webirc/websocket/",
+        "direct": true,
+        "channel": "#kiwiirc-test",
+        "nick": "kiwi-n?",
+        "remember_buffers": false
+    },
+    "embedly": {
+        "key": ""
+    },
+    "plugins": []
+}

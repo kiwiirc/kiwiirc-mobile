@@ -1,0 +1,19 @@
+# JetBrains project files
+.idea
+
+# NPM
+node_modules
+
+# NativeScript application
+
+/hooks/before-checkForChanges/
+/hooks/before-watch/
+/hooks/before-prepare/
+/hooks/after-prepare/*
+!/hooks/after-prepare/kiwi-plugins-copy-resources.js
+/platforms
+/mobile.ipa
+/mobile.app*
+/*.mobileprovision
+/report
+/.update_backup

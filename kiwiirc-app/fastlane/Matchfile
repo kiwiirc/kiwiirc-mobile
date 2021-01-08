@@ -1,0 +1,4 @@
+storage_mode "git"
+git_url ENV["GIT_URL"]
+app_identifier ENV["APP_IDENTIFIER"]
+username ENV["USERNAME"]

@@ -1,0 +1,151 @@
+{
+    "email": "Email",
+    "confirm_email": "Confirmar email",
+    "register_account": "Registar uma nova conta",
+    "log_in": "Entrar no IRC",
+    "create_account": "Criar uma nova conta",
+    "login_with_existing_account": "Entrar com a sua conta",
+    "nickname": "Nickname",
+
+    "has_joined": "👋 {{nick}} entrou!",
+    "kicked_you_from": "😲 Foste kickado do {{channel}} por {{nick}}",
+    "was_kicked_from": "😲 {{nick}} foi kickado do {{channel}} por {{chanop}}",
+    "has_left": "👋 {{nick}} saiu",
+    "invited_you": "😄 {{nick}} convidou-te para o canal {{channel}}",
+
+    "confirm_logout": "Tem a certeza que deseja sair?",
+    "log_out": "Sair",
+    "email_hint": "o_seu@email.com",
+
+    "disconnected": "Não ligado.",
+    "connection_error": "Ocorreu um erro ao ligar à rede.",
+
+    "registration_form": {
+        "i_agree": "Concordo em ser sensato",
+        "errs": {
+            "name_in_use": "Este nome de utilizador não está disponível",
+            "user_exists": "Este nome de utilizador não está disponível",
+            "no_guest": "Este nome de utilizador não está disponível",
+            "invalid_name": "Nome de utilizador inválido",
+            "invalid_username": "Nome de utilizador inválido",
+            "missing_email": "Email inválido",
+            "invalid_email": "Email inválido",
+            "invalid_password": "Senha inválida"
+        }
+    },
+
+    "err_unknown_host": "Domínio ou host desconhecido",
+    "err_forbidden": "Ligação não permitida",
+    "err_timeout": "Ligação muito demorada",
+    "err_refused": "O servidor recusou a ligação",
+    "err_tls": "Não foi possível efetuar a ligação com segurança",
+    "err_proxy": "Ocorreu um erro no servidor IRC Kiwi IRC",
+    "err_invalid_login": "Autenticação inválida",
+    "err_connection_error": "Erro de ligação a {{network}}",
+    "err_invalid_password_logout": "Não foi possível conectar. Por favor tente fazer o login de novo.",
+
+    "registration_success": {
+        "congratulations": "🎊Parabéns!",
+        "congratulations_title": "Estamos quase lá!",
+        "congratulations_msg": "Foi-lhe enviado um email de confirmação. Clique no link que recebeu e depois faça o login."
+    },
+
+    "kiwi_settings": "Definições",
+    "build_version": "Versão",
+
+    "profile_settings": "Perfil",
+
+    "copy_clipboard": "Copiar",
+    "copied_clipboard": "Copiado!",
+
+    "channel_list": "Lista de canais",
+    "search_channel": "Procurar Canal",
+    "join_channel": "Entrar num canal",
+    "create_channel": "Criar o canal",
+    "search_all_channels": "Procurar Todos os Canais",
+    "channelsfound": "{{count}} canal encontrado",
+    "channelsfound_0": "nenhum canal encontrado",
+    "channelsfound_plural": "{{count}} canais encontrados",
+    "updating": "Atualizando...",
+
+    "more_details": "Mais detalhes",
+    "ignore_user": "Ignorar este utilizador",
+    "unignore_user": "Parar de ignorar este utilizador",
+    "user_kick": "Kickar utilizador",
+    "user_ban": "Banir utilizador",
+    "user_kick_confirm": "Tem a certeza de que quer kickar {{nick}}?",
+    "user_ban_confirm": "Tem a certeza de que quer banir {{nick}}?",
+
+    "user_message": "Mensagem para um utilizador",
+    "user_not_found": "Não foi possível encontrar {{nick}}",
+
+    "upload_new_avatar": "Fazer upload de novo avatar",
+    "upload_new_avatar_error": "Erro no upload de novo avatar",
+
+    "date_divider_format": "%a, %d de %b",
+
+    "confirm_add_network": {
+        "title": "Conectar à rede IRC.com?",
+        "text": "Isto irá adicionar e conectar à rede IRC.com."
+    },
+    "auto_connect_messages": {
+        "connect_bouncer": "A conectar ao bouncer.",
+        "connect_network": "A conectar a {{network}}."
+    },
+
+    "strftime": {
+        "days": [
+            "domingo",
+            "segunda-feira",
+            "terça-feira",
+            "quarta-feira",
+            "quinta-feira",
+            "sexta-feira",
+            "sábado"
+        ],
+        "shortDays": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+        "months": [
+            "janeiro",
+            "fevereiro",
+            "março",
+            "abril",
+            "maio",
+            "junho",
+            "julho",
+            "agosto",
+            "setembro",
+            "outubro",
+            "novembro",
+            "dezembro"
+        ],
+        "shortMonths": [
+            "Jan",
+            "Fev",
+            "Mar",
+            "Abr",
+            "Mai",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Set",
+            "Out",
+            "Nov",
+            "Dez"
+        ],
+        "AM": "AM",
+        "PM": "PM",
+        "am": "am",
+        "pm": "pm",
+        "formats": {
+            "c": "%a %d %b %Y %X %Z",
+            "D": "%d-%m-%Y",
+            "F": "%Y-%m-%d",
+            "R": "%H:%M",
+            "r": "%I:%M:%S %p",
+            "T": "%H:%M:%S",
+            "v": "%e-%b-%Y",
+            "X": "%T",
+            "x": "%D"
+        }
+    }
+}
