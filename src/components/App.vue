@@ -346,9 +346,10 @@ export default {
             }
         },
         isPresentingBufferPage(buffer) {
-            const currentPage = this.$el.nativeView.frame.currentPage;
+            const currentPage = this.$el.nativeView?.frame?.currentPage;
 
             return (
+                currentPage &&
                 currentPage.networkid === buffer.networkid &&
                 currentPage.buffername === buffer.name
             );
