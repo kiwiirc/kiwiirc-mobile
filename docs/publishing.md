@@ -1,4 +1,19 @@
-## Publishing with local fastlane
+# Publishing
+
+## Android
+
+Running `ns build android` will create an Android project under `platforms/android`. This project
+can be opened in Android Studio and published in the Play Store [like any other Android app](http://developer.android.com/tools/publishing/publishing_overview.html).
+
+You can also find more information on building a signed release `.apk` [here](https://docs.nativescript.org/tooling/publishing/publishing-android-apps).
+
+## iOS
+
+Running `ns prepare ios --release` will generate an Xcode project at `/platforms/ios/kiwiirc-app.xcworkspace`. You can open this project on Xcode and publish it [like any other iOS app](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html).
+
+You can find more information on the [NativeScript publishing guide for iOS](https://docs.nativescript.org/tooling/publishing/publishing-ios-apps).
+
+## Publishing with fastlane
 
 You can publish the app to the App Store (iOS) and Google Play (Android) with [fastlane](https://fastlane.tools/). For more options and/or troubleshooting, see this more complete [guide](https://nativescript.org/blog/automatic-nativescript-app-deployments-with-fastlane/).
 

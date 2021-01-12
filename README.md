@@ -51,58 +51,10 @@ ns run android|ios
 
 If all goes well, NativeScript will build and open the app on a connected 
 device or simulator.
-More options on running the app [bellow](#Running).
 
-### Running
+More info on [running](./docs/running.md#Running) and [debugging](./docs/running.md#Debugging) the app [here](./docs/running.md).
 
-#### Android
-
-You can run the app in:
-- A virtual device created through the [AVD manager](https://developer.android.com/studio/run/managing-avds)
-- A real Android device connected through USB, with developer mode and USB debugging enabled
-
-The command `ns devices android --available-devices` will list the available devices. You can
-select a specific devce with `ns run android --device=<Image Identifier>`.
-
-#### iOS
-
-You can run the app in:
-- A simulator installed through Xcode > Preferences > Components;
-- A real iOS device connected through USB. You will need an [iOS developer account](https://developer.apple.com/).
-
-The command `ns devices ios --available-devices` will list the available devices. You can
-select a specific devce with `ns run ios --device=<Image Identifier>`.
-
-#### Debugging
-
-To run the app in debug mode, use the command:
-
-```bash
-ns debug android|ios
-```
-
-This command will output more logs and a link that opens the Chrome developer tools, allowing 
-you to debug JavaScript (with breakpoints, step debugging, inspecting variables, etc.).
-
-### Publishing
-
-#### Android
-
-Running `ns build android` will create an Android project under `platforms/android`. This project
-can be opened in Android Studio and published in the Play Store [like any other Android app](http://developer.android.com/tools/publishing/publishing_overview.html).
-
-You can also find more information on building a signed release `.apk` [here](https://docs.nativescript.org/tooling/publishing/publishing-android-apps).
-
-#### iOS
-
-Running `ns prepare ios --release` will generate an Xcode project at `/platforms/ios/kiwiirc-app.xcworkspace`. You can open this project on Xcode and publish it [like any other iOS app](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html).
-
-You can find more information on the [NativeScript publishing guide for iOS](https://docs.nativescript.org/tooling/publishing/publishing-ios-apps).
-
-#### Fastlane
-
-You can automate the deployment of iOS and Android apps to app stores with [fastlane](https://fastlane.tools/). 
-More on this [here](./docs/deploying_with_fastlane.md).
+See [here](./docs/publishing.md) how to build the app for release and how to publish to Google Play (Android) and App Store (iOS).
 
 ## Repository structure
 - `kiwiirc/` - Shared source with the core [`KiwiIRC`](https://github.com/kiwiirc/kiwiirc) project (see [here](./docs/updating_kiwiirc.md) how to update this)
