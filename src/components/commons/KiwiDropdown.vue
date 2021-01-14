@@ -1,5 +1,13 @@
 <template>
-    <dock-layout class="select input" @tap="openPicker">
+    <dock-layout class="select input" :class="{'select--with-icon': icon}" @tap="openPicker" stretchLastChild="true">
+        <label
+            v-if="icon"
+            :text="icon"
+            dock="left"
+            class="icon fas hint-color"
+            android:paddingTop="8"
+        />
+
         <label
             :rotate="opened ? 180 : 0"
             dock="right"
@@ -7,7 +15,7 @@
             verticalAlignment="center"
             text=""
         />
-        <label :text="currentItem" class="label m-l-10" />
+        <label :text="currentItem" class="value" :class="{'value--null': currentItem === nullItem}" />
     </dock-layout>
 </template>
 
@@ -26,6 +34,7 @@ export default {
             type: Array,
             default: () => [],
         },
+        icon: String,
         item: String,
         nullItem: {
             type: String,
@@ -86,7 +95,40 @@ export default {
 </script>
 
 <style scoped>
-.select {
+DockLayout.select {
+    height: 40;
+    padding: 0;
+    background-color: var(--input-bg);
+    border-radius: var(--roundness);
+    border-width: 2;
+    border-color: var(--input-border);
+}
+
+.select .value {
+    margin-left: 15;
+    vertical-align: center;
+    color: var(--default-fg);
+}
+
+.select .value--null {
+    color: var(--hint-color);
+}
+
+.select--with-icon .value {
+    margin-left: 6;
+}
+
+.select label.icon {
+    padding: 0;
+    margin: 0 0 0 10;
+    width: 28;
+    font-size: 20;
+    height: 36;
+    horizontal-alignment: left;
+    vertical-alignment: center;
+    color: #e3e6e8;
+    border-right-width: 1;
+    border-color: var(--input-border);
 }
 
 .nullItem {

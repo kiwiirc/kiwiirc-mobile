@@ -8,6 +8,25 @@
                     verticalAlignment="bottom"
                     textWrap="true"
                 />
+                <kiwi-dropdown
+                    v-if="bouncerList.length > 1"
+                    class="input m-t-20 m-x-20"
+                    :options="bouncerList"
+                    nullItem="Select Provider"
+                    icon=""
+                    v-model="bouncer"
+                    @select="bouncerSelect"
+                />
+                <text-field
+                    v-if="bouncer === 'Custom'"
+                    v-model="bouncerUri"
+                    class="input m-y-10 m-x-20"
+                    hint="server hostname"
+                    returnKeyType="done"
+                    autocapitalizationType="none"
+                    autocorrect="false"
+                    keyboardType="email"
+                />
                 <icon-text-field
                     ref="usernameField"
                     v-model="username"
@@ -49,6 +68,7 @@
 
 <script>
 import Logger from '@/libs/Logger';
+import * as Misc from '@/helpers/Misc';
 import getBncLogin from '@mobile/libs/BncLogin';
 
 const log = Logger.namespace('Bouncer');
@@ -61,6 +81,8 @@ export default {
             error: '',
             busy: false,
             loadingStatus: '',
+            bouncer: '',
+            bouncerUri: '',
         };
     },
     computed: {
@@ -73,12 +95,29 @@ export default {
                 ? greeting
                 : this.$t('start_greeting');
         },
-        buttonText: function buttonText() {
+        buttonText() {
             let greeting = this.$state.settings.startupOptions.buttonText;
             return typeof greeting === 'string'
                 ? greeting
                 : this.$t('start_button');
         },
+        bouncerPresets() {
+            let presets = this.$state.settings.presetBouncers || [];
+            return presets.map((str) => Misc.parsePresetServer(str));
+        },
+        bouncerList() {
+            return [
+                ...this.bouncerPresets.map((preset) => preset.name),
+                'Custom',
+            ];
+        },
+    },
+    created() {
+        if (this.bouncerList.length > 1) {
+            let preset = this.bouncerPresets[0];
+            this.bouncer = preset.name;
+            this.bouncerUri = preset.toUri();
+        }
     },
     methods: {
         returnPressPasswordField(event) {
@@ -87,11 +126,29 @@ export default {
                 this.connect();
             }
         },
+        bouncerSelect(value) {
+            if (!value || value === 'Custom') {
+                this.bouncerUri = '';
+                return;
+            }
+
+            let preset = this.bouncerPresets.find(
+                (preset) => preset.name === value
+            );
+
+            this.bouncerUri = (preset) ?
+                preset.toUri() :
+                '';
+        },
         async connect() {
             const bncLogin = getBncLogin();
             this.error = '';
             this.busy = true;
             this.loadingStatus = this.$t('logging_in');
+
+            // This will be used within initialiser.js to change the
+            // bouncer server, port, tls settings
+            this.$state.setting('bouncerUri', this.bouncerUri);
 
             bncLogin
                 .login(this.username, this.password)
