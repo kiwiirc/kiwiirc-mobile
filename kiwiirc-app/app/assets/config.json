@@ -3,9 +3,7 @@
     "startupScreen": "bouncer",
     "kiwiServer": "https://localdev.clients.kiwiirc.com/webirc/kiwiirc/",
     "appSettings": {
-        "appID": "com.kiwiirc.ircclient",
-        "appVersion": "0.2.0",
-        "configUrl": "https://kiwiirc.com/svs/app/config/"
+        "configUrl": ""
     },
     "restricted": false,
     "theme": "Default",
@@ -16,12 +14,12 @@
         }
     ],
     "startupOptions": {
-        "server":"betabnc.irc.com",
-        "port":6697,
-        "tls":true,
-        "direct":true,
-        "direct_path":"/",
-        "bouncer":true
+        "server": "betabnc.irc.com",
+        "port": 6697,
+        "tls": true,
+        "direct": true,
+        "direct_path": "/",
+        "bouncer": true
     },
     "embedly": {
         "key": ""
