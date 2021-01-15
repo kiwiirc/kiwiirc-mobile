@@ -12,6 +12,7 @@ import {
 import { openUrl } from 'tns-core-modules/utils/utils';
 import { alert } from '@nativescript/core/ui/dialogs';
 import { connectionType, startMonitoring } from 'tns-core-modules/connectivity';
+import * as appversion from 'nativescript-appversion';
 import * as Sound from "nativescript-sound-kak";
 import Themes from 'nativescript-themes';
 import InAppBrowser from 'nativescript-inappbrowser';
@@ -117,7 +118,7 @@ export async function updateConfig(needsStartupOptions = true) {
 async function getUpdatedConfig(needsStartupOptions) {
     const cachedConfig = await loadConfigFromCache();
 
-    if (cachedConfig && 
+    if (cachedConfig &&
         Date.now() - lastUpdate < 60 * 1000 &&
         (needsStartupOptions && cachedConfig.startupOptions)) {
         // will use cached config if there is a cachedConfig and
@@ -137,8 +138,8 @@ async function getUpdatedConfig(needsStartupOptions) {
 
     try {
         // generate the url from the bundledConfig or state settings
-        const url = makeServerConfigUrl(storedConfig);
-        
+        const url = await makeServerConfigUrl(storedConfig);
+
         const serverConfig = await requestConfig(url);
         const newConfig = _.merge(bundledConfig, serverConfig);
         log.info('newConfig: ' + JSON.stringify(newConfig));
@@ -184,10 +185,10 @@ async function requestConfig(configUrl) {
     return json;
 }
 
-function makeServerConfigUrl(config) {
+async function makeServerConfigUrl(config) {
     const url = new URL(config.appSettings.configUrl, true);
-    
-    url.query.app = config.appSettings.appID;
+
+    url.query.app = await appversion.getAppID();
     url.query.device = Device.uuid;
     url.query.cb = new Date().getTime();
 
@@ -318,7 +319,7 @@ function initInputCommands() {
 
 function initSound() {
     const sound = Sound.create(`${appPath}/assets/sounds/highlight.mp3`);
-    
+
     const bleep = new AudioManager(sound);
 
     const state = getState();
