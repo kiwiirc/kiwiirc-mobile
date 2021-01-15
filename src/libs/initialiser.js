@@ -7,11 +7,15 @@ import {
     Device,
     isIOS,
     Frame,
-    ApplicationSettings
+    File,
+    ApplicationSettings,
+    Utils,
+    Connectivity,
+    knownFolders,
+    path
 } from '@nativescript/core';
-import { openUrl } from 'tns-core-modules/utils/utils';
+import { FileSystemAccess } from '@nativescript/core/file-system/file-system-access';
 import { alert } from '@nativescript/core/ui/dialogs';
-import { connectionType, startMonitoring } from 'tns-core-modules/connectivity';
 import * as appversion from 'nativescript-appversion';
 import * as Sound from "nativescript-sound-kak";
 import Themes from 'nativescript-themes';
@@ -34,15 +38,9 @@ import { AudioManager } from '@/libs/AudioManager';
 import ThemeManager from '@/libs/ThemeManager';
 import { VibrationManager } from '@mobile/libs/VibrationManager';
 
-import '@mobile/styles/scss/platforms/_index.scss';
-
-const fs = require('tns-core-modules/file-system');
-const FileSystemAccess = require('tns-core-modules/file-system/file-system-access')
-    .FileSystemAccess;
-
 require('nativescript-websockets');
 
-const appPath = fs.knownFolders.currentApp().path + '/';
+const appPath = knownFolders.currentApp().path + '/';
 const FSA = new FileSystemAccess();
 
 let api = (global.kiwi = GlobalApi.singleton());
@@ -158,14 +156,14 @@ async function getUpdatedConfig(needsStartupOptions) {
 /**
  * Returns the config bundled in config.json
  */
-function getBundledConfig() {
-    const configFileName = fs.path.join(appPath, 'assets/config.json');
+function getBundledConfig() {   
+    const configFileName = path.join(appPath, 'assets/config.json');
 
     if (!FSA.fileExists(configFileName)) {
         throw new Error(`File ${configFileName} not found.`);
     }
 
-    const file = fs.File.fromPath(configFileName);
+    const file = File.fromPath(configFileName);
     const configText = file.readTextSync();
     const initialConfig = JSON.parse(configText);
     Misc.dedotObject(initialConfig);
@@ -361,8 +359,8 @@ function initUniversalLinks() {
 
 function initConnectionWatcher() {
     const state = getState();
-    startMonitoring((newConnectionType) => {
-        if (newConnectionType === connectionType.none) {
+    Connectivity.startMonitoring((newConnectionType) => {
+        if (newConnectionType === Connectivity.connectionType.none) {
             state.$emit('device.disconnected');
         } else {
             state.$emit('device.connected');
@@ -469,7 +467,7 @@ function initMediaViewer() {
                 });
                 log('BROWSER RESULT: ' + JSON.stringify(result));
             } else {
-                openUrl(url);
+                Utils.openUrl(url);
             }
         } catch (error) {
             InAppBrowser.close();

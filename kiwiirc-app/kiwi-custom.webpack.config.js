@@ -3,7 +3,7 @@ const fs = require('fs');
 const fse = require('fs-extra');
 
 const webpack = require('webpack');
-const nsWebpack = require('nativescript-dev-webpack');
+const nsWebpack = require('@nativescript/webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const packageJson = require('./package.json');

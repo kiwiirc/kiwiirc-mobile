@@ -59,7 +59,7 @@
 'kiwi public';
 
 import _ from 'lodash';
-import { isIOS, isAndroid } from 'tns-core-modules/platform';
+import { isIOS, isAndroid } from '@nativescript/core';
 
 import Logger from '@/libs/Logger';
 import GlobalApi from '@mobile/libs/GlobalApi';

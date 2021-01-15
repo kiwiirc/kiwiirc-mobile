@@ -1,5 +1,5 @@
 import Vue from 'nativescript-vue';
-import VueDevtools from 'nativescript-vue-devtools';
+// import VueDevtools from 'nativescript-vue-devtools';
 
 import { isIOS, isAndroid, Application, Profiling } from '@nativescript/core';
 
@@ -90,7 +90,7 @@ export function startApp() {
     /* global TNS_ENV */
     if (TNS_ENV !== 'production') {
         // Vue.config.silent = false;
-        Vue.use(VueDevtools, { host: '192.168.1.211' });
+        // Vue.use(VueDevtools, { host: '192.168.1.211' });
     }
 
     console.log("$start app");
@@ -141,13 +141,7 @@ function loadGlobalComponents() {
                 event: 'checkedChange',
             },
         }
-    );
-
-    Vue.registerElement(
-        'PullToRefresh',
-        // eslint-disable-next-line global-require
-        () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh
-    );
+);
 
     Vue.directive('dismissesIOSKeyboard', {
         bind(el, binding) {

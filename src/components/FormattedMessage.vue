@@ -1,8 +1,7 @@
 <script>
 'kiwi public';
 
-import { FormattedString } from 'tns-core-modules/text/formatted-string';
-import { Span } from 'tns-core-modules/text/span';
+import { FormattedString, Span } from '@nativescript/core';
 
 export default {
     functional: true,

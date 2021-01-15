@@ -1,0 +1,13 @@
+{
+	"name": "migration",
+	"paths": [
+		"hooks",
+		"webpack.config.js",
+		"package.json",
+		"nsconfig.json",
+		"app/package.json",
+		"package.json",
+		"nsconfig.json",
+		"app/package.json"
+	]
+}

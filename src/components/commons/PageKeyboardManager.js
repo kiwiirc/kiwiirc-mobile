@@ -1,7 +1,5 @@
 import _ from 'lodash';
-import * as application from 'tns-core-modules/application';
-import { topmost } from 'tns-core-modules/ui/frame';
-import { isIOS } from 'tns-core-modules/platform';
+import { Application, isIOS, Frame } from '@nativescript/core';
 
 /* global
     UIScrollViewKeyboardDismissMode
@@ -24,11 +22,11 @@ if (isIOS) {
 }
 
 function setupIosKeyboardListeners() {
-    application.ios.addNotificationObserver(
+    Application.ios.addNotificationObserver(
         UIKeyboardWillChangeFrameNotification,
         (notification) => {
             const safeAreaInsetBottom = _.get(
-                topmost(),
+                Frame.topmost(),
                 'nativeView.safeAreaInsets.bottom',
                 0
             );
@@ -67,7 +65,7 @@ function setupIosKeyboardListeners() {
         }
     );
 
-    application.ios.addNotificationObserver(
+    Application.ios.addNotificationObserver(
         UIKeyboardWillHideNotification,
         (notification) => {
             keyboardDismissing = true;

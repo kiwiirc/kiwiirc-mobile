@@ -77,8 +77,6 @@
 <script>
 'kiwi public';
 
-import { isIOS } from 'tns-core-modules/platform';
-
 import { verticalCenterLabel } from '@mobile/libs/utils/ui';
 import MessageList from './MessageList';
 import ControlInput from './ControlInput';

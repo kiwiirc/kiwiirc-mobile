@@ -1,4 +1,4 @@
-import { TextField } from '@nativescript/core/ui/text-field/text-field';
+import { TextField } from '@nativescript/core';
 
 const UndismissableUITextFieldDelegate = (NSObject as any).extend(
     {

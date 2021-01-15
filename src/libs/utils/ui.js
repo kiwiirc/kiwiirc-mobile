@@ -1,4 +1,4 @@
-import { isAndroid } from 'tns-core-modules/platform';
+import { isAndroid } from "@nativescript/core";
 
 export function verticalCenterLabel(view) {
     if (isAndroid) {

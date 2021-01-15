@@ -1,5 +1,5 @@
-import { AnimationCurve } from 'tns-core-modules/ui/enums';
 import { Animation, Color, GestureTypes } from '@nativescript/core';
+import { AnimationCurve } from '@nativescript/core/ui/enums';
 
 export function addTouchPop(view) {
     if (!view || !view.animate) {
