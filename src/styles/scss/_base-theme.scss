@@ -95,6 +95,11 @@
     background-color: var(--default-bg);
 }
 
+.bouncer-page, .app-page {
+    // background-color has no effect for some unknown reason
+    background: var(--default-bg);
+}
+
 /* TEXT */
 .h1,
 .h2,
@@ -206,7 +211,7 @@
     }
 }
 
-$brand-colors: ('primary', var(--primary5)), ('accent', var(--accent3)),
+$brand-colors: ('primary', var(--primary3)), ('accent', var(--accent3)),
     ('danger', var(--actiondanger3)), ('actiongo', var(--actiongo3)),
     ('warning', var(--warning4)), ('inverted', var(--default-bg)),
     ('neutral', var(--neutral4));
@@ -214,11 +219,11 @@ $brand-colors: ('primary', var(--primary5)), ('accent', var(--accent3)),
 @each $name, $color in $brand-colors {
     .btn.btn-#{$name} {
         background-color: $color;
-        color: var(--default-bg);
+        color: var(--neutral1);
 
         &[isEnabled='false'] {
-            color: var(--neutral4);
-            border-color: var(--neutral4);
+            color: var(--neutral3);
+            border-color: var(--neutral3);
         }
 
         &.btn-text,
