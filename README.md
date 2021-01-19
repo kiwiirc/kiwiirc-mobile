@@ -4,6 +4,8 @@ An open source IRC client for iOS and Android built using [NativeScript-Vue](htt
 
 - Always connected with with [kiwiBnc](https://github.com/kiwiirc/kiwibnc)
 - Full message history
+- Themeable
+- Customiseable through the plugin system
 
 ## Getting started
 
@@ -11,7 +13,19 @@ An open source IRC client for iOS and Android built using [NativeScript-Vue](htt
 
 - [Nodejs](https://nodejs.org/)
 - [yarn](https://yarnpkg.com/)
-- A full [NativeScript environment](https://nativescript-vue.org/en/docs/getting-started/installation/)
+- NativeScript CLI
+  ```bash
+  npm install -g nativescript
+  ```
+- Setup for [macOS (iOS and Android development)](https://docs.nativescript.org/start/ns-setup-os-x)
+- Setup for [Windows (Android development)](https://docs.nativescript.org/start/ns-setup-win)
+- Setup for [Linux (Android development)](https://docs.nativescript.org/start/ns-setup-linux)
+
+To check the NativeScript environment, run the NativeScript CLI command:
+
+```bash
+ns doctor
+```
 
 ### Building
 
@@ -32,14 +46,15 @@ yarn setup
 
 ```bash
 cd kiwiirc-app
-ns run ios|android
+ns run android|ios
 ```
 
-### Deploying
+If all goes well, NativeScript will build and open the app on a connected 
+device or simulator.
 
-Fastlane is supported to automate the deployment of iOS and Android apps to app stores.  More on this [here](./docs/deploying_with_fastlane.md))
+More info on [running](./docs/running.md#Running) and [debugging](./docs/running.md#Debugging) the app [here](./docs/running.md).
 
-Other deployment methods are available for both [Android](https://docs.nativescript.org/tooling/publishing/publishing-android-apps) and [iOS](https://docs.nativescript.org/tooling/publishing/publishing-ios-apps).
+See [here](./docs/publishing.md) how to build the app for release and how to publish to Google Play (Android) and App Store (iOS).
 
 ## Repository structure
 - `kiwiirc/` - Shared source with the core [`KiwiIRC`](https://github.com/kiwiirc/kiwiirc) project (see [here](./docs/updating_kiwiirc.md) how to update this)
@@ -71,7 +86,8 @@ Create a new App Project by copying `kiwiirc-app` to a new folder. You must then
   - `Android/src/main/res/values[-21]?/colors.xml`;
 - `package.json` (nativescript.id, name);
 - `app/app.scss` (theme, other style overrides);
-- `app/assets/config.json` (Irc connection, plugins, etc.). By default, the app will use the bouncer `betabnc.irc.com`. This is only temporary. A custom app bundle should use another bouncer provider.
+- `app/assets/config.json` (Irc connection, plugins, etc.). By default, the app will use the 
+bouncer `betabnc.irc.com`. You can costumise the BNC server in the `startupOptions` parameter.
 
 The main entry point for the application is `app/main.js`. While you may modify this, it is advised to use [plugins](#Plugins) instead to customise your Kiwi IRC App Project.
 
