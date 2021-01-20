@@ -20,8 +20,8 @@
                 <text-field
                     v-if="bouncer === 'Custom'"
                     v-model="bouncerUri"
-                    class="input m-y-10 m-x-20"
-                    hint="server hostname"
+                    class="input m-t-10 m-x-20"
+                    hint="Server hostname (host:+port)"
                     returnKeyType="done"
                     autocapitalizationType="none"
                     autocorrect="false"
