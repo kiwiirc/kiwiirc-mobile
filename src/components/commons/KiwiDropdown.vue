@@ -96,12 +96,7 @@ export default {
 
 <style scoped>
 DockLayout.select {
-    height: 40;
     padding: 0;
-    background-color: var(--input-bg);
-    border-radius: var(--roundness);
-    border-width: 2;
-    border-color: var(--input-border);
 }
 
 .select .value {
