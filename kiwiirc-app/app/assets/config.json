@@ -29,6 +29,9 @@
         "freenode|irc.freenode.net:+6697",
         "snoonet|irc.snoonet.org:+6697"
     ],
+    "presetBouncers": [
+        "IRC.com Beta|betabnc.irc.com:+6697"
+    ],
     "buffers" : {
         "show_presence_changes": false
     }

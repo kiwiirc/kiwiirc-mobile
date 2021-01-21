@@ -101,7 +101,6 @@ export function resetApp() {
 export async function updateConfig(needsStartupOptions = true) {
     // for more information on the config update flow, see docs/server_config_flow.md
     const updatedConfig = await getUpdatedConfig(needsStartupOptions);
-
     console.log('updatedConfig.startupScreen: ' + updatedConfig.startupScreen);
 
     if (needsStartupOptions && !updatedConfig.startupOptions) {
@@ -113,6 +112,9 @@ export async function updateConfig(needsStartupOptions = true) {
     const config = await configLoader.loadFromObj(updatedConfig);
 
     applyConfig(config);
+
+    // maybeUpdateBouncer changes the bouncers server, port, tls if required
+    maybeUpdateBouncer();
 }
 
 async function getUpdatedConfig(needsStartupOptions) {
@@ -585,4 +587,24 @@ function initLocales() {
             }
         }
     }
+}
+
+function maybeUpdateBouncer() {
+    let state = getState();
+    let bouncerUri = state.setting('bouncerUri');
+    if (!bouncerUri) {
+        return;
+    }
+
+    let preset = Misc.parsePresetServer(bouncerUri);
+    if (!preset) {
+        return;
+    }
+
+    let options = state.settings.startupOptions;
+    options.server = preset.server;
+    options.port = preset.port || 80;
+    options.tls = preset.tls || (options.port === 443);
+    options.direct = true;
+    options.direct_path = '/';
 }
