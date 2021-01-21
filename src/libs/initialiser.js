@@ -16,7 +16,7 @@ import {
 } from '@nativescript/core';
 import { FileSystemAccess } from '@nativescript/core/file-system/file-system-access';
 import { alert } from '@nativescript/core/ui/dialogs';
-import * as appversion from 'nativescript-appversion';
+import * as appversion from '@nativescript/appversion';
 import * as Sound from "nativescript-sound-kak";
 import Themes from 'nativescript-themes';
 import InAppBrowser from 'nativescript-inappbrowser';
