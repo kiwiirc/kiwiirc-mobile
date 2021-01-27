@@ -66,8 +66,8 @@ export function initApp() {
 
     return updateConfig(false) // loads the config (see bellow)
         .then(initState) // load the persisted state, creates the $state mixin
-        .then(initPlugins) // inits the plugin system and loads plugins
         .then(initLocales) // loads the needed localization files
+        .then(initPlugins) // inits the plugin system and loads plugins
         .then(initThemes) // loads the theme system
         .then(initUniversalLinks)
         .then(initInputCommands) // inits the input commands handler
@@ -526,7 +526,7 @@ function initLocales() {
     i18next.changeLanguage('en-us');
     let foundLanguage = false;
 
-    // Go through our browser languages until we find one that we support
+    // Go through our devices languages until we find one that we support
     for (let idx = 0; idx < preferredLangs.length; idx++) {
         let lang = preferredLangs[idx];
 
@@ -547,13 +547,10 @@ function initLocales() {
             log.info('adding: @mobile/assets/locales/' + lang + '.json');
 
             try {
-                const mobileTranslation = require('@mobile/assets/mobile-locales/' +
-                    lang +
-                    '.json');
                 i18next.addResourceBundle(
                     lang,
                     'translation',
-                    mobileTranslation
+                    require('@mobile/assets/mobile-locales/' + lang + '.json')
                 );
                 log.info('adding: @mobile/assets/mobile-locales/' + lang + '.json');
             } catch (e) {

@@ -95,7 +95,8 @@ module.exports = (env) => {
         new webpack.DefinePlugin({
             'process.version': "''",
             'window.console': 'console',
-        })
+        }),
+        new webpack.IgnorePlugin({resourceRegExp: /assets\/plugins/}),
     );
 
     // copy kiwiirc-mobile assets and fonts
