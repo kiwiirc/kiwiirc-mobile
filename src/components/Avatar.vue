@@ -3,13 +3,11 @@
 
 import { createNickColour } from '@/helpers/TextFormatting';
 import { verticalCenterLabel } from '@mobile/libs/utils/ui';
-// import { wrapPerfFn, perfTimer } from '@/helpers/PerfUtils';
 
 export default {
     functional: true,
     props: ['user', 'nick', 'large'],
     render(createElement, context) {
-        // let t = perfTimer('AVATAR RENDER');
         if (!context.props.user && !context.props.nick) {
             return null;
         }
@@ -67,8 +65,6 @@ export default {
             },
         });
 
-        // t.end();
-        // t.log();
         return el;
     },
 };

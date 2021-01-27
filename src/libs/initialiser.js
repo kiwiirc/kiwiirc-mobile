@@ -43,6 +43,7 @@ const FileSystemAccess = require('tns-core-modules/file-system/file-system-acces
 require('nativescript-websockets');
 
 const appPath = fs.knownFolders.currentApp().path + '/';
+const FSA = new FileSystemAccess();
 
 let api = (global.kiwi = GlobalApi.singleton());
 
@@ -158,8 +159,6 @@ async function getUpdatedConfig(needsStartupOptions) {
  * Returns the config bundled in config.json
  */
 function getBundledConfig() {
-    const FSA = new FileSystemAccess();
-
     const configFileName = fs.path.join(appPath, 'assets/config.json');
 
     if (!FSA.fileExists(configFileName)) {
@@ -288,30 +287,19 @@ async function initPlugins() {
     const plugins = state.setting('plugins');
 
     for (let pluginDefinition of plugins) {
-        if (typeof pluginDefinition === 'string') {
-            pluginDefinition = {
-                name: pluginDefinition,
-                file: pluginDefinition,
-            };
+        if (!pluginDefinition.name || !pluginDefinition.url) {
+            throw new Error('Invalid plugin definition. Plugins need a "name" and "url".')
         }
 
-        /* eslint-disable global-require */
-        /* eslint-disable import/no-dynamic-require */
-        const plugin = await import(
-            /* webpackInclude: /ns-kiwi-plugin-/ */
-            /* webpackExclude: /(\/assets\/|\/platforms\/)/ */
-            `@app/../node_modules/${pluginDefinition.file}/index.js`);
-        /* eslint-enable import/no-dynamic-require */
-        /* eslint-enable global-require */
-
-        if (typeof plugin.default === 'function') {
-            await api.initPlugin({
-                name: pluginDefinition.name,
-                fn: plugin.default,
-            });
+        const pluginFileName = fs.path.join(appPath, pluginDefinition.url);
+        if (!FSA.fileExists(pluginFileName)) {
+            throw new Error(`Plugin ${pluginDefinition.name} file ${pluginFileName} not found.`);
         }
-        log(`Initialised plugin: ${pluginDefinition.name}`);
+        log(`plugin require: ${pluginDefinition.url}`);
+        __non_webpack_require__(pluginFileName);
     }
+
+    api.init();
 }
 
 function initInputCommands() {
@@ -491,6 +479,9 @@ function initMediaViewer() {
 }
 
 function initLocales() {
+    // Make the translation services available via the global API
+    api.i18n = i18next;
+
     // eslint-disable-next-line global-require
     const AvailableLocales = require('@/res/locales/available.json');
     const fallbackLocale = 'en-us';

@@ -28,9 +28,6 @@ module.exports = (env) => {
         nsWebpack.getAppPath(platform, projectRoot)
     );
 
-    const plugins = Object.keys(packageJson.dependencies).filter(
-        (packageName) => packageName === 'kiwiirc-mobile' || packageName.startsWith('ns-kiwi-plugin-'));
-
     // make sure the translation files are included in the final bundle. They are
     // required dynamically
     config.externals.push((context, request, callback) => {
@@ -104,20 +101,6 @@ module.exports = (env) => {
     // copy kiwiirc-mobile assets and fonts
     addCopyToConfig(config, `${mobileDir}/src/assets`, `${dist}/assets/`);
     addCopyToConfig(config, `${mobileDir}/src/fonts`, `${dist}/fonts/`);
-
-    plugins.forEach((plugin) => {
-        const pluginDir = resolve('./node_modules', plugin);
-
-        if (fs.existsSync(`${pluginDir}/assets`)) {
-            console.log(`Copying ${plugin}'s assets to ${dist}/assets/.`);
-            addCopyToConfig(config, `${pluginDir}/assets`, `${dist}/assets/`);
-        }
-
-        if (fs.existsSync(`${pluginDir}/fonts`)) {
-            console.log(`Copying ${plugin}'s fonts to ${dist}/fonts/.`);
-            addCopyToConfig(config, `${pluginDir}/fonts`, `${dist}/fonts/`);
-        }
-    });
 
     const locales = require(`${webDir}/build/webpack/locales.js`);
     console.log('Translating languages...');
