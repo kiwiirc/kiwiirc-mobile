@@ -5,7 +5,7 @@
     "license": "MIT",
     "version": "0.27.1",
     "scripts": {
-        "setup": "git submodule update --init --recursive && yarn && cd kiwiirc && yarn"
+        "setup": "git submodule update --init --recursive && yarn && cd kiwiirc && yarn && ns doctor"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.8.1",
