@@ -8,7 +8,7 @@ export function startup(vueInstance, state) {
     if (state.networks.length > 0) {
         const bncLogin = getBncLogin(state, log);
         bncLogin.prepare();
-        return 'done';
+        return Promise.resolve('done');
     }
     log('navigating to Bouncer');
     return vueInstance.$showModal(Bouncer, {
