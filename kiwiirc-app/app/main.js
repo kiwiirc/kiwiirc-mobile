@@ -14,7 +14,6 @@ if (TNS_ENV === 'production') {
     Logger.setLevel(2);
 }
 
-// require plugins with dependencies e.g.:
-// require('ns-kiwi-plugin-sample');
+require('./plugins');
 
 startApp();

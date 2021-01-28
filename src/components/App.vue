@@ -151,64 +151,6 @@ export default {
         }, 50);
 
         log('APP CREATED DONE!');
-
-        // function perfTimer(label) {
-        //     let start = 0;
-        //     let last = 0;
-        //     let marks = [];
-
-        //     let ret = {
-        //         marks,
-        //         mark: function(markLabel) {
-        //             let now = performance.now();
-        //             marks.push({label: label + '-' + markLabel, len: now-last});
-        //             last = now;
-        //         },
-        //         fork: function(forkLabel) {
-        //             let t = perfTimer(label + ' > ' + forkLabel);
-        //             marks.push(t);
-        //             return t;
-        //         },
-        //         end: function() {
-        //             let end = performance.now();
-        //             marks.push({label: label + '-end', len: end-start});
-        //         },
-        //         log: function() {
-        //             for(let i=0; i<marks.length; i++) {
-        //                 let m = marks[i];
-        //                 if (m.mark) {
-        //                     m.log();
-        //                 } else {
-        //                     console.log(`[perf ${m.label}] ${m.len}ms`);
-        //                 }
-        //             }
-        //         },
-        //     };
-
-        //     start = last = performance.now();
-        //     // ret.mark('start');
-        //     return ret;
-        // }
-
-        // function wrapPerfFn(fn) {
-        //     return function wrappedPerfFn() {
-        //         let t = perfTimer(fn.name || 'wrappedPerfFn');
-        //         let ret = fn.apply(this, Array.prototype.slice.call(arguments, 0));
-        //         t.end();
-        //         t.log();
-        //         return ret;
-        //     };
-        // }
-
-        // function wrapAllFnsInObj(obj) {
-        //     for(let fnName in obj) {
-        //         if (typeof obj[fnName] === 'function') {
-        //             obj[fnName] = wrapPerfFn(obj[fnName]);
-        //         }
-        //     }
-        // }
-
-        // wrapAllFnsInObj(this.$state);
     },
     destroyed() {
         log('APP DESTROYED!!!');

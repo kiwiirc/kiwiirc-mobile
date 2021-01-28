@@ -38,9 +38,9 @@ To add a single-file plugin to the [App Project](../README.md#App-Projects), fol
 These Kiwi mobile plugins are [NativeScript plugins](https://docs.nativescript.org/plugins/plugin-reference). 
 This means that they must follow the [NativeScript plugin requirements](https://docs.nativescript.org/plugins/plugin-reference#create-a-plugin).
 
-Use the [ns-kiwi-plugin-sample](https://github.com/kiwiirc/ns-kiwi-plugin-sample) as a starting point.
+Use the [kiwiirc-mobile-plugin-sample](https://github.com/kiwiirc/kiwiirc-mobile-plugin-sample) as a starting point.
 
-1. Download the repo as a [.zip file](https://github.com/kiwiirc/ns-kiwi-plugin-sample/archive/master.zip);
+1. Download the repo as a [.zip file](https://github.com/kiwiirc/kiwiirc-mobile-plugin-sample/archive/master.zip);
 
 2. Change the name of the package in `src/package.json` (e.g. `my-kiwi-plugin`);
 
@@ -51,18 +51,15 @@ Use the [ns-kiwi-plugin-sample](https://github.com/kiwiirc/ns-kiwi-plugin-sample
 
   > See other options to install NativeScript plugins [here](https://docs.nativescript.org/plugins/plugin-reference#install-a-plugin).
 
-4. `require()` the plugin in the App Project's `app/main.js` before `startApp()`:
+4. `require()` the plugin in the App Project's `app/plugins.js``:
     ```js
-    (...)
     // require npm plugins:
     require('my-kiwi-plugin');
-
-    startApp();
     ```
 
 ### Plugin resources
 NPM plugins can include a `platforms` directory. This directory holds resource files similar to the `app/App_Resources` directory. 
-Check the [sample plugin project](https://github.com/kiwiirc/ns-kiwi-plugin-sample) to see the expected folder structure.
+Check the [sample plugin project](https://github.com/kiwiirc/kiwiirc-mobile-plugin-sample) to see the expected folder structure.
 This directory is used for image resources (see how to use them [here](https://docs.nativescript.org/ui/image-resources)). These can be accessed for example with `background: url('res://my_img')'`.
 
 ## Creating a plugin
