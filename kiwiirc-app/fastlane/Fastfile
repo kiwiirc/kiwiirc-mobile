@@ -60,12 +60,11 @@ platform :ios do
     certificates
 
     build_app(
-      scheme: "mobile",
-      workspace: './platforms/ios/mobile.xcworkspace',
+      scheme: "kiwiircapp",
+      workspace: './platforms/ios/kiwiircapp.xcworkspace',
       configuration: "Release",
       export_method: "app-store",
       export_team_id: ENV["TEAM_ID"],
-      skip_codesigning: true,
       include_bitcode: true,
     )
 
@@ -76,22 +75,15 @@ platform :ios do
         ENV["APP_IDENTIFIER"] => ENV["sigh_" + ENV["APP_IDENTIFIER"] + "_appstore_profile-path"],
       }
     })
-
-    resign(
-      ipa: "./mobile.ipa",
-      signing_identity: ENV["SIGNING_IDENTITY"],
-      provisioning_profile: {
-        ENV["APP_IDENTIFIER"] => ENV["sigh_" + ENV["APP_IDENTIFIER"] + "_appstore_profile-path"],
-      }
-    )
+    
   end
 
   desc 'Upload dSYMs to Crashlytics.'
   lane :upload_dsyms do 
     upload_symbols_to_crashlytics(
       binary_path: "./platforms/ios/Pods/Fabric/upload-symbols",
-      dsym_path: "./mobile.app.dSYM.zip",
-      gsp_path: "./platforms/ios/mobile/Resources/GoogleService-Info.plist"
+      dsym_path: "./kiwiircapp.app.dSYM.zip",
+      gsp_path: "./platforms/ios/kiwiircapp/Resources/GoogleService-Info.plist"
     )
   end
 
@@ -133,7 +125,7 @@ platform :android do
   desc 'Build the Android application.'
   lane :build do
     sh("tns", "build", "android", "--bundle", "--release", "--clean", "--env.production",
-      "--key-store-path", Dir.pwd + "/keys/mobile.keystore",
+      "--key-store-path", Dir.pwd + "/keys/kiwiircapp.keystore",
       "--key-store-password", ENV["KEYSTORE_PASSWORD"],
       "--key-store-alias", ENV["KEYSTORE_ALIAS"],
       "--key-store-alias-password", ENV["KEYSTORE_ALIAS_PASSWORD"]
