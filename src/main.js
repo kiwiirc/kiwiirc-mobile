@@ -1,7 +1,7 @@
 import Vue from 'nativescript-vue';
 import VueDevtools from 'nativescript-vue-devtools';
 
-import { isIOS, isAndroid, Application } from '@nativescript/core';
+import { isIOS, isAndroid, Application, Profiling } from '@nativescript/core';
 
 import i18next from 'i18next';
 import VueI18Next from '@panter/vue-i18next';
@@ -28,9 +28,23 @@ const log = Logger.namespace('main');
 
 // in production, do not log to console.
 if (TNS_ENV === 'production') {
-    console.log = () => {};
+    console.log = () => { };
 } else {
     Logger.setLevel(2);
+    // Vue.mixin({
+    //     beforeUpdate() {
+    //         console.log(this.$vnode.tag + ' start');
+    //         // profiling.start('messagelist-update');
+    //     },
+    //     updated() {
+    //         console.log(this.$vnode.tag + ' stop');
+    //         // profiling.stop('messagelist-update');
+    //     },
+    // });
+
+    // // add `@profiling.profile` decorator to suspected functions to monitor them
+    // Profiling.enable();
+    // setInterval(Profiling.dumpProfiles, 10000);
 }
 
 Vue.config.performance = true;
@@ -72,7 +86,7 @@ export function startApp() {
 
     initLocalization();
     loadGlobalComponents();
-    
+
     /* global TNS_ENV */
     if (TNS_ENV !== 'production') {
         // Vue.config.silent = false;
