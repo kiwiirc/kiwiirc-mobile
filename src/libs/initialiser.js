@@ -149,7 +149,7 @@ async function getUpdatedConfig(needsStartupOptions) {
         saveConfigToCache(newConfig);
         lastUpdate = Date.now();
         return newConfig;
-    } catch(e) {
+    } catch (e) {
         log.error(e);
         return storedConfig;
     }
@@ -288,15 +288,22 @@ async function initPlugins() {
 
     for (let pluginDefinition of plugins) {
         if (!pluginDefinition.name || !pluginDefinition.url) {
-            throw new Error('Invalid plugin definition. Plugins need a "name" and "url".')
+            log.error('Invalid plugin definition. Plugins need a "name" and "url".');
+            continue;
         }
 
         const pluginFileName = fs.path.join(appPath, pluginDefinition.url);
         if (!FSA.fileExists(pluginFileName)) {
-            throw new Error(`Plugin ${pluginDefinition.name} file ${pluginFileName} not found.`);
+            log.error(`Plugin ${pluginDefinition.name} file ${pluginFileName} not found.`);
+            continue;
         }
         log(`plugin require: ${pluginDefinition.url}`);
-        __non_webpack_require__(pluginFileName);
+        try {
+            __non_webpack_require__(pluginFileName);
+        } catch (e) {
+            log.error('Error loading plugin: ' + e);
+            continue;
+        }
     }
 
     api.init();
