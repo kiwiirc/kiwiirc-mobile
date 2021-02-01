@@ -6,7 +6,7 @@ import { Span } from 'tns-core-modules/text/span';
 
 export default {
     functional: true,
-    props: ['messageBlocks'],
+    props: ['blocks'],
     render(createElement, context) {
         let classes = [];
         if (context.data.class) {
@@ -21,7 +21,7 @@ export default {
             class: classes,
             attrs: {
                 ...context.data.attrs,
-                formattedText: formatMessage(context.props.messageBlocks),
+                formattedText: formatMessage(context.props.blocks),
                 textWrap: true,
                 borderRadius: 2,
             },
@@ -31,14 +31,14 @@ export default {
     },
 };
 
-function formatMessage(messageBlocks) {
+function formatMessage(blocks) {
     const formattedMessage = new FormattedString();
 
-    if (!messageBlocks) {
+    if (!blocks) {
         return formattedMessage;
     }
 
-    const spans = messageBlocks
+    const spans = blocks
         .filter((block) => block.containsContent)
         .map((block, i) => {
             const span = new Span();
@@ -85,7 +85,7 @@ function formatMessage(messageBlocks) {
             if (block.type === 'emoji' && block.meta.emoji) {
                 span.text = String.fromCodePoint(`0x${block.meta.emoji}`);
                 span.cssClasses.add('messagelist-emoji');
-                if (messageBlocks.length === 1) {
+                if (blocks.length === 1) {
                     span.cssClasses.add('messagelist-emoji--single');
                 }
             }

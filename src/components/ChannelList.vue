@@ -1,18 +1,24 @@
 <template>
-    <grid-layout class="channellist" columns="*" rows="100, *">
-        <label v-if="!isConnected"
-               row="1"
-               class="label"
-               horizontalAlignment="center"
-               verticalAlignment="center"
-               :text="$t('state_disconnected')"
+    <grid-layout
+        class="channellist"
+        columns="*"
+        rows="100, *"
+    >
+        <label
+            v-if="!isConnected"
+            row="1"
+            class="label"
+            horizontalAlignment="center"
+            verticalAlignment="center"
+            :text="$t('state_disconnected')"
         />
 
-        <dock-layout v-show="isConnected"
-                     row="0"
-                     class="p-x-20 default-bg"
-                     iosOverflowSafeArea="false"
-                     verticalAlignment="top"
+        <dock-layout
+            v-show="isConnected"
+            row="0"
+            class="p-x-20 default-bg"
+            iosOverflowSafeArea="false"
+            verticalAlignment="top"
         >
             <label
                 v-show="listState"
@@ -50,14 +56,18 @@
             />
         </dock-layout>
 
-        <list-view v-show="isConnected && isUpdated"
-                   v-dismissesIOSKeyboard
-                   row="1"
-                   for="channel in filteredList"
-                   class="channellist-list"
-                   @itemLoading="itemLoading"
+        <list-view
+            v-show="isConnected && isUpdated"
+            v-dismissesIOSKeyboard
+            row="1"
+            for="channel in filteredList"
+            class="channellist-list"
+            @itemLoading="itemLoading"
         >
-            <v-template if="!channel.new" name="join-channel">
+            <v-template
+                if="!channel.new"
+                name="join-channel"
+            >
                 <grid-layout
                     :class="{ odd: $even }"
                     columns="*, auto, 50"
@@ -70,9 +80,15 @@
                         col="0"
                         class="channellist-channel"
                     />
-                    <label col="1" class="channellist-numusers">
+                    <label
+                        col="1"
+                        class="channellist-numusers"
+                    >
                         <formatted-string>
-                            <span class="fas" text=" " />
+                            <span
+                                class="fas"
+                                text=" "
+                            />
                             <span
                                 :text="
                                     channel.num_users >= 0
@@ -91,7 +107,10 @@
                         horizontalAlignment="right"
                         @tap="addChannel(channel)"
                     >
-                        <span class="fas" text="" />
+                        <span
+                            class="fas"
+                            text=""
+                        />
                     </button>
                     <label
                         col="0"
@@ -100,7 +119,7 @@
                         class="divider"
                     />
                     <formatted-message
-                        :messageBlocks="parseTopic(channel.topic)"
+                        :blocks="parseTopic(channel.topic)"
                         row="2"
                         colSpan="3"
                         class="channellist-topic p-b-10"
@@ -108,7 +127,10 @@
                     />
                 </grid-layout>
             </v-template>
-            <v-template if="channel.new" name="create-channel">
+            <v-template
+                if="channel.new"
+                name="create-channel"
+            >
                 <grid-layout
                     :class="{ odd: $even }"
                     columns="*, 50"

@@ -90,7 +90,7 @@
                         ? `messagelist-item-${message.type}-${message.type_extra}`
                         : '',
                 ]"
-                :messageBlocks="message.messageBlocks"
+                :blocks="message.blocks"
                 scaleY="-1"
                 @tap="openMessageOptions($event, message)"
             />
@@ -142,13 +142,13 @@ export default {
         },
     },
     watch: {
-        'buffer.name': function(newBufferName) {
+        'buffer.name': function (newBufferName) {
             this.resetMessageList();
         },
-        'buffer.last_read': function(lastRead, oldLastRead) {
+        'buffer.last_read': function (lastRead, oldLastRead) {
             this.updateMessages();
         },
-        'buffer.message_count': function(newCount, oldCount) {
+        'buffer.message_count': function (newCount, oldCount) {
             this.updateMessages();
         },
         seeBottom(seeBottom) {
@@ -179,11 +179,6 @@ export default {
 
                 // hydrate the message with some info
                 this.hydrateMessage(message);
-
-                // workaround because the object looses the user ref in the observable array.
-                if (message.user) {
-                    message.userRef = message.user;
-                }
 
                 if (
                     previousMessage &&
@@ -245,8 +240,8 @@ export default {
                     this.messages.splice(index, change.count);
                 } else if (change.added) {
                     // add items
+                    const newItems = change.value;
                     if (index === 0) {
-                        const newItems = change.value;
                         if (this.seeBottom) {
                             this.messages.unshift(...newItems);
                             this.$emit('newMessagesCountChanged', 0);
@@ -257,7 +252,7 @@ export default {
                             );
                         }
                     } else {
-                        this.messages.splice(index, 0, ...change.value);
+                        this.messages.splice(index, 0, ...newItems);
                     }
                     index += change.count;
                 } else {
@@ -308,13 +303,11 @@ export default {
                 return;
             }
 
-            const urls = message.messageBlocks
-                .filter((block) => block.type === 'url')
-                .map((block) => block.meta.url);
-            const users = message.messageBlocks
+            const urls = message.mentioned_urls;
+            const users = message.blocks
                 .filter((block) => block.type === 'user')
                 .map((block) => block.meta.user);
-            const channels = message.messageBlocks
+            const channels = message.blocks
                 .filter((block) => block.type === 'channel')
                 .map((block) => block.meta.channel);
 
@@ -387,32 +380,32 @@ export default {
                     }
 
                     switch (action.type) {
-                    case 'url':
-                        this.$state.$emit('mediaviewer.show', action.value);
-                        break;
-                    case 'user':
-                        this.$state.$emit('userbox.show',
-                            action.value,
-                            {
-                                network: this.network,
-                                buffer: this.buffer,
+                        case 'url':
+                            this.$state.$emit('mediaviewer.show', action.value);
+                            break;
+                        case 'user':
+                            this.$state.$emit('userbox.show',
+                                action.value,
+                                {
+                                    network: this.network,
+                                    buffer: this.buffer,
+                                });
+                            break;
+                        case 'channel':
+                            this.$state.addBuffer(
+                                this.buffer.networkid,
+                                action.value
+                            );
+                            this.network.ircClient.join(action.value);
+                            break;
+                        case 'clipboard':
+                            clipboard.setText(action.value).then(() => {
+                                new Toasty({
+                                    text: this.$t('copied_clipboard'),
+                                }).show();
                             });
-                        break;
-                    case 'channel':
-                        this.$state.addBuffer(
-                            this.buffer.networkid,
-                            action.value
-                        );
-                        this.network.ircClient.join(action.value);
-                        break;
-                    case 'clipboard':
-                        clipboard.setText(action.value).then(() => {
-                            new Toasty({
-                                text: this.$t('copied_clipboard'),
-                            }).show();
-                        });
-                        break;
-                    default: break;
+                            break;
+                        default: break;
                     }
                 })
                 .catch(console.error)
@@ -448,39 +441,28 @@ export default {
             );
         },
         hydrateMessage(message) {
-            message.isMessage = ['privmsg', 'action', 'notice', 'message'].includes(message.type);
-            message.isOwn = message.nick === this.myNick.toLowerCase();
-            message.formatedTime = this.formatTime(message.time);
-            message.nickColour = createNickColour(message.nick);
             message.isUnread =
                 this.buffer.last_read &&
                 message.time > this.buffer.last_read;
 
-            message.messageBlocks = parseMessage(
-                message.message,
-                {
-                    extras: true,
-                },
-                this.buffer.users || []
-            );
-
-            if (!message.hasRendered) {
-                GlobalApi.singleton().emit('message.render', { message: message });
-
-                message.mentioned_urls = message.messageBlocks
-                    .filter((block) => block.type === 'url')
-                    .map((block) => block.meta.url);
-
-                message.maybeAutoEmbed();
-
-                message.attach = message.attach || [];
-                const urlPreviewAttach = getUrlPreviewAttach(message);
-                if (urlPreviewAttach) {
-                    message.attach.push(urlPreviewAttach);
-                }
-
-                message.hasRendered = true;
+            if (message.hasRendered) {
+                return;
             }
+
+            message.isMessage = ['privmsg', 'action', 'notice', 'message'].includes(message.type);
+            message.isOwn = message.nick === this.myNick.toLowerCase();
+            message.formatedTime = this.formatTime(message.time);
+            message.nickColour = createNickColour(message.nick);
+            message.toBlocks(this.buffer, true);
+            GlobalApi.singleton().emit('message.render', { message: message });
+
+            message.attach = message.attach || [];
+            const urlPreviewAttach = getUrlPreviewAttach(message);
+            if (urlPreviewAttach) {
+                message.attach.push(urlPreviewAttach);
+            }
+
+            message.hasRendered = true;
         },
         scrollToBottom(animated = false) {
             if (!this.$refs?.messageList?.nativeView) {

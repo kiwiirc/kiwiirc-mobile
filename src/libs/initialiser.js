@@ -190,7 +190,7 @@ async function requestConfig(configUrl) {
 async function makeServerConfigUrl(config) {
     const url = new URL(config.appSettings.configUrl, true);
 
-    url.query.app = await appversion.getAppID();
+    url.query.app = await appversion.getAppId();
     url.query.device = Device.uuid;
     url.query.cb = new Date().getTime();
 

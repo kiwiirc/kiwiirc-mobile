@@ -32,33 +32,33 @@ export default {
         if (message.attach?.length) {
             message.attach.forEach((attach) => {
                 switch (attach.embedType) {
-                // if (message.message === attach.url) {
-                //     message.supressMessage = true;
-                // }
-                // parts.push({
-                //     component: MessageListImagePreview,
-                //     props: { ...attach },
-                // });
-                // break;
-                case 'image':
-                case 'url':
-                    if (message.message === attach.url) {
-                        message.supressMessage = true;
-                    }
-                    parts.push({
-                        component: MessageListUrlPreview,
-                        props: attach,
-                        on: {
-                            tap: (event) => {
-                                if (typeof context.listeners.openUrl === 'function') {
-                                    context.listeners.openUrl(attach.url);
-                                }
+                    // if (message.message === attach.url) {
+                    //     message.supressMessage = true;
+                    // }
+                    // parts.push({
+                    //     component: MessageListImagePreview,
+                    //     props: { ...attach },
+                    // });
+                    // break;
+                    case 'image':
+                    case 'url':
+                        if (message.message === attach.url) {
+                            message.supressMessage = true;
+                        }
+                        parts.push({
+                            component: MessageListUrlPreview,
+                            props: attach,
+                            on: {
+                                tap: (event) => {
+                                    if (typeof context.listeners.openUrl === 'function') {
+                                        context.listeners.openUrl(attach.url);
+                                    }
+                                },
                             },
-                        },
-                    });
-                    break;
-                default:
-                    break;
+                        });
+                        break;
+                    default:
+                        break;
                 }
             });
         }
@@ -67,7 +67,7 @@ export default {
             parts.unshift({
                 component: FormattedMessage,
                 props: {
-                    messageBlocks: message.messageBlocks,
+                    blocks: message.blocks,
                 },
                 on: {
                     tap: (event) => {

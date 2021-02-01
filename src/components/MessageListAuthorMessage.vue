@@ -37,7 +37,7 @@
         >
             <avatar
                 class="messagelist-author-avatar"
-                :user="props.message.userRef"
+                :user="props.message.user"
                 :nick="props.message.nick"
                 @doubleTap="listeners.nickDoubleTap(props.message.nick)"
                 @tap="listeners.openMessageOptions($event, props.message)"
@@ -45,7 +45,7 @@
             <away-status-indicator
                 class="messagelist-author-awaystatusindicator"
                 :network="props.network"
-                :user="props.message.userRef"
+                :user="props.message.user"
                 toggle="false"
             />
         </absolute-layout>
