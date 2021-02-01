@@ -58,7 +58,7 @@ See [here](./docs/publishing.md) how to build the app for release and how to pub
 
 ## Repository structure
 - `kiwiirc/` - Shared source with the core [`KiwiIRC`](https://github.com/kiwiirc/kiwiirc) project (see [here](./docs/updating_kiwiirc.md) how to update this)
-- `kiwiirc-app/` - The default [App Project](#App-Project) for Kiwi IRC
+- `kiwiirc-app/` - The default [App Project](#App-Projects) for Kiwi IRC
 - `src/` - The main mobile application source
 
 ## App Projects
@@ -93,6 +93,6 @@ The main entry point for the application is `app/main.js`. While you may modify 
 
 ## Plugins
 
-Plugins let you customise the Kiwi IRC mobile app without modifying the core project source. They use the same API as the kiwi web client which can be found [here](https://github.com/kiwiirc/kiwiirc/wiki/Plugins#api).
+Plugins let you customise the Kiwi IRC mobile app without modifying the core project source.
 
-Installing a plugin is a simple `yarn add ns-kiwi-plugin-*` command away and adding it to your App Project `app/config.json` file. Plugins added to this config file will be loaded at startup. You can find more information on creating plugins in the example plugin [here](https://github.com/kiwiirc/ns-kiwi-plugin-sample).
+You will find the plugin documentation [here](./docs/plugins.md).

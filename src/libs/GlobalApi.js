@@ -1,11 +1,16 @@
 'kiwi public';
 
+import Vue from 'nativescript-vue';
 import _ from 'lodash';
 import EventEmitter from 'eventemitter3';
+import JSON5 from 'json5';
+import * as appversion from 'nativescript-appversion';
+
 import * as Misc from '@/helpers/Misc';
 import Logger from '@/libs/Logger';
 
 let singletonInstance = null;
+let pluginsToInit = [];
 let nextPluginId = 0;
 
 export default class GlobalApi extends EventEmitter {
@@ -14,16 +19,41 @@ export default class GlobalApi extends EventEmitter {
 
         /* eslint-disable no-underscore-dangle */
         this.exports = global._kiwi_exports || {};
+        
+        // eslint-disable-next-line no-undef
+        appversion.getVersionName().then(version => this.version = version);
+
+        /** A reference to the internal Vuejs instance */
+        this.Vue = Vue;
+        /** Expose JSON5 so that plugins can use the same config format */
+        this.JSON5 = JSON5;
+        /** The applications internal state */
         this.state = null;
 
         this.controlInputToolPlugins = [];
         this.controlInputTopPlugins = [];
         this.stateBrowserPlugins = [];
+        this.isReady = false;
     }
 
     static singleton() {
         singletonInstance = singletonInstance || new GlobalApi();
         return singletonInstance;
+    }
+
+    init() {
+        this.isReady = true;
+        this.initPlugins();
+    }
+
+    // Init any plugins that were added before we were ready
+    initPlugins() {
+        pluginsToInit.forEach((plugin) => this.initPlugin(plugin));
+    }
+
+
+    versionMatches(v) {
+        return compareVersions(this.version, v) >= 0;
     }
 
     static recreate() {
@@ -32,9 +62,22 @@ export default class GlobalApi extends EventEmitter {
         return singletonInstance;
     }
 
+    /**
+     * Register a plugin with kiwi
+     *
+     * Plugins being loaded at startup will be registered once Kiwi is ready. At any
+     * other point the plugin will be registered instantly
+     * @param {String} pluginName The name of this plugin
+     * @param {Function} fn A callback function to start the plugin. function(kiwi, logger)
+     */
     plugin(pluginName, fn) {
         let plugin = { name: pluginName, fn: fn };
-        this.initPlugin(plugin);
+        if (!pluginsToInit.some( p => p.name === plugin.name)) {
+            pluginsToInit.push(plugin);
+        }
+        if (this.isReady) {
+            this.initPlugin(plugin);
+        }
     }
 
     async initPlugin(plugin) {
