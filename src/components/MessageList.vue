@@ -101,13 +101,13 @@
 <script>
 'kiwi public';
 
+import _ from 'lodash';
 import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 import { isIOS, isAndroid, GestureTypes } from '@nativescript/core';
 import { Menu } from 'nativescript-menu';
 import { Toasty } from 'nativescript-toasty';
 
 import * as bufferTools from '@/libs/bufferTools';
-import parseMessage from '@/libs/MessageParser';
 import { createNickColour } from '@/helpers/TextFormatting';
 import GlobalApi from '@mobile/libs/GlobalApi';
 import { strftime } from '@mobile/libs/utils/lang';
@@ -264,9 +264,24 @@ export default {
             this.$state.$emit('controlinput.insertNick', nick);
         },
         loaded(event) {
+            const messageList = event.object;
+
+            const debouncedRefresh = _.debounce(() => messageList.refresh(), 250, { 'maxWait': 1000 });
+
+            this.listen(this.$state, 'message.refresh', (data) => {
+                for (let i = 0; i < this.messages.length; i++) {
+                    const item = this.messages.getItem(i);
+                    if (item.id === data.messageId && messageList.isItemAtIndexVisible(i)) {
+                        refreshed = true;
+                        debouncedRefresh();
+                        break;
+                    }
+                }
+            });
+
             if (isIOS) {
                 /* global UITableViewAutomaticDimension */
-                this.$refs.messageList.nativeView.rowHeight = UITableViewAutomaticDimension;
+                messageList.rowHeight = UITableViewAutomaticDimension;
             }
 
             event.object.on(GestureTypes.pan, (args) => {

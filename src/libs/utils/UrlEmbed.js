@@ -11,13 +11,14 @@ export {
 };
 
 function getUrlPreviewAttach(message) {
+    const state = getState();
     const url = message.embed?.payload;
 
     if (!url) {
         return null;
     }
 
-    const urlTransformer = getState().setting('buffers.thumbnail_url_transformer');
+    const urlTransformer = state.setting('buffers.thumbnail_url_transformer');
     if (!urlTransformer) {
         return null;
     }
@@ -26,6 +27,7 @@ function getUrlPreviewAttach(message) {
     if (message.embed.type === 'image') {
         const imagePreviewAttach = {
             id: 'url-preview-' + message.id,
+            messageId: message.id,
             embedType: 'image',
             url: url,
             title: '',
@@ -37,7 +39,7 @@ function getUrlPreviewAttach(message) {
             loading: false,
         };
 
-        loadItemThumbnail(imagePreviewAttach);
+        loadItemThumbnail(imagePreviewAttach, state);
 
         return imagePreviewAttach;
     } else {
@@ -50,7 +52,7 @@ function getUrlPreviewAttach(message) {
             loadingInfo: true,
         };
 
-        const embedUrl = getState().setting('buffers.embed_service_url').replace(
+        const embedUrl = state.setting('buffers.embed_service_url').replace(
             '{url}',
             encodeURIComponent(url)
         );
@@ -73,7 +75,7 @@ function getUrlPreviewAttach(message) {
                         '{url}',
                         encodeURIComponent(r.thumbnail_url)
                     );
-                    loadItemThumbnail(noembedPreviewItem);
+                    loadItemThumbnail(noembedPreviewItem, state);
                 }
             }).catch((e) => {
                 noembedPreviewItem.loadingInfo = false;
@@ -86,7 +88,7 @@ function getUrlPreviewAttach(message) {
     }
 }
 
-function loadItemThumbnail(messageListItem) {
+function loadItemThumbnail(messageListItem, state) {
     const myImage = previewThumbsCache.get(messageListItem.thumbnailUrl);
 
     if (myImage) {
@@ -98,12 +100,14 @@ function loadItemThumbnail(messageListItem) {
             completed: (image, key) => {
                 if (messageListItem.thumbnailUrl === key) {
                     messageListItem.thumbnail = new ImageSource(image).resize(200);
+                    state.$emit('message.refresh', { id: messageListItem.id, url: messageListItem.url, messageId: messageListItem.messageId });
                 }
             },
             error: (key) => {
                 if (messageListItem.thumbnailUrl === key) {
                     // set error image
                     messageListItem.thumbnail = previewThumbsCache.errorPlaceholder;
+                    state.$emit('message.refresh', { id: messageListItem.id, url: messageListItem.url, messageId: messageListItem.messageId });
                 }
             },
         });
