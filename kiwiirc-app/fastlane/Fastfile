@@ -78,15 +78,6 @@ platform :ios do
     
   end
 
-  desc 'Upload dSYMs to Crashlytics.'
-  lane :upload_dsyms do 
-    upload_symbols_to_crashlytics(
-      binary_path: "./platforms/ios/Pods/Fabric/upload-symbols",
-      dsym_path: "./kiwiircapp.app.dSYM.zip",
-      gsp_path: "./platforms/ios/kiwiircapp/Resources/GoogleService-Info.plist"
-    )
-  end
-
   desc 'Ship to Testflight.'
   lane :ship_testflight do
     alpha_groups = ENV["ALPHA_GROUPS"].split(' ');
@@ -113,8 +104,6 @@ platform :ios do
         notes: ENV["NOTES"]
       },
     )
-
-    upload_dsyms
   end
 
 end

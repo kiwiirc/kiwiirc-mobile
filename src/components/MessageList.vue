@@ -272,7 +272,6 @@ export default {
                 for (let i = 0; i < this.messages.length; i++) {
                     const item = this.messages.getItem(i);
                     if (item.id === data.messageId && messageList.isItemAtIndexVisible(i)) {
-                        refreshed = true;
                         debouncedRefresh();
                         break;
                     }
