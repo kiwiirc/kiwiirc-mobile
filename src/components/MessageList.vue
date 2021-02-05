@@ -10,6 +10,7 @@
         @loaded="loaded"
         @layoutChanged="layoutChanged"
         @loadMoreItems="loadMoreItems"
+        @itemTap="maybeOpenMessageOptions"
     >
         <v-template
             if="message.isMessage && !message.isRepeat"
@@ -20,8 +21,7 @@
                 :network="network"
                 :isFirst="$index === 0"
                 @nickDoubleTap="nickDoubleTap"
-                @openMessageOptions="openMessageOptions"
-                @openUrl="$state.$emit('mediaviewer.show', $event)"
+                @openUrl="openUrl"
             />
         </v-template>
         <v-template
@@ -29,13 +29,11 @@
             name="message-repeat"
         >
             <message-list-message
-                v-cellHighlight
                 class="messagelist-item"
                 :message="message"
                 :isFirst="$index === 0"
                 scaleY="-1"
-                @openMessageOptions="openMessageOptions"
-                @openUrl="$state.$emit('mediaviewer.show', $event)"
+                @openUrl="openUrl"
             />
         </v-template>
         <v-template
@@ -76,7 +74,6 @@
             name="notification"
         >
             <formatted-message
-                v-cellHighlight
                 :class="[
                     'messagelist-item',
                     'messagelist-item-notification',
@@ -92,7 +89,6 @@
                 ]"
                 :blocks="message.blocks"
                 scaleY="-1"
-                @tap="openMessageOptions($event, message)"
             />
         </v-template>
     </list-view>
@@ -103,6 +99,7 @@
 
 import _ from 'lodash';
 import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
+import { setTimeout } from '@nativescript/core/timer';
 import { isIOS, isAndroid, GestureTypes } from '@nativescript/core';
 import { Menu } from 'nativescript-menu';
 import { Toasty } from 'nativescript-toasty';
@@ -260,7 +257,20 @@ export default {
                 }
             });
         },
+        openUrl(event) {
+            if (isIOS) {
+                // cancel opening the message options
+                this.cancelOpenOptions = true;
+                setTimeout(() => this.cancelOpenOptions = false, 400);
+            }
+            this.$state.$emit('mediaviewer.show', event);
+        },
         nickDoubleTap(nick) {
+            if (isIOS) {
+                // cancel opening the message options
+                this.cancelOpenOptions = true;
+                setTimeout(() => this.cancelOpenOptions = false, 400);
+            }
             this.$state.$emit('controlinput.insertNick', nick);
         },
         loaded(event) {
@@ -311,12 +321,27 @@ export default {
         layoutChanged() {
             setTimeout(() => this.scrollToBottom(false), 100);
         },
-        openMessageOptions(event, message) {
-            const sender = message.userRef;
-            if (!message || this.showingMessageOptions) {
+        maybeOpenMessageOptions(event) {
+            if (isIOS) {
+                // delay opening the message options on iOS in case these is
+                // an openUrl or nickDoubleTap event on the way.
+                setTimeout(() => this.openMessageOptions(event), 200);
+                return;
+            } else {
+                this.openMessageOptions(event);
+            }
+        },
+        openMessageOptions(event) {
+            if (this.cancelOpenOptions) {
+                this.cancelOpenOptions = false;
+                return;
+            }
+            const message = event.item;
+            if (!message || !message.blocks || this.showingMessageOptions) {
                 return;
             }
 
+            const sender = message.nick;
             const urls = message.mentioned_urls;
             const users = message.blocks
                 .filter((block) => block.type === 'user')
@@ -351,19 +376,15 @@ export default {
                 };
             });
 
+            if (sender && users.every((user) => user !== sender)) {
+                users.unshift(sender);
+            }
+
             const usersList = users.map((user) => ({
                 title: '👤 ' + user,
                 type: 'user',
                 value: this.$state.getUser(this.buffer.networkid, user),
             }));
-
-            if (sender && users.every((user) => user !== sender.nick)) {
-                usersList.unshift({
-                    title: '👤 ' + sender.nick,
-                    type: 'user',
-                    value: sender,
-                });
-            }
 
             const channelsList = channels.map((channel) => ({
                 title: '＃ ' + channel,
@@ -532,6 +553,10 @@ export default {
         // },
     },
 };
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 /**
  * Applies a fix for Android API 28 where the momentum is applied in the oposite direction

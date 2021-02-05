@@ -1,6 +1,5 @@
 <template functional>
     <grid-layout
-        v-cellHighlight
         scaleY="-1"
         columns="50, *"
         rows="25, auto"
@@ -23,7 +22,6 @@
             <message-list-message
                 :message="props.message"
                 hideHighlight="true"
-                @openMessageOptions="listeners.openMessageOptions"
                 @openUrl="listeners.openUrl"
             />
         </content-view>
@@ -40,7 +38,6 @@
                 :user="props.message.user"
                 :nick="props.message.nick"
                 @doubleTap="listeners.nickDoubleTap(props.message.nick)"
-                @tap="listeners.openMessageOptions($event, props.message)"
             />
             <away-status-indicator
                 class="messagelist-author-awaystatusindicator"
@@ -56,7 +53,6 @@
             marginBottom="5"
             class="messagelist-author-header"
             @doubleTap="listeners.nickDoubleTap(props.message.nick)"
-            @tap="listeners.openMessageOptions($event, props.message)"
         >
             <formatted-string>
                 <span

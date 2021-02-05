@@ -1,6 +1,5 @@
 <template functional>
     <grid-layout
-        v-cellHighlight="props.hideHighlight ? 'disabled' : 'enabled'"
         :class="[
             'messagelist-message-url-preview',
             data.class,
@@ -13,6 +12,7 @@
         v-on="data.on"
     >
         <image
+            v-touchPop
             col="0"
             row="0"
             rowSpan="2"

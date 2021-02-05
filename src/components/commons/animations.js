@@ -37,12 +37,21 @@ export function addCellHighlight(view) {
     if (!view || !view.animate) {
         return;
     }
+    view.backgroundColor = "rgba(144, 144, 144, 0)";
     let animation = new Animation([
         {
             target: view,
             backgroundColor: new Color('rgba(144,144,144,0.4)'),
-            duration: 200,
+            duration: 100,
             curve: AnimationCurve.easeIn,
+        },
+    ]);
+    let animationOut = new Animation([
+        {
+            target: view,
+            backgroundColor: new Color('rgba(144,144,144,0)'),
+            duration: 200,
+            curve: AnimationCurve.easeOut,
         },
     ]);
 
@@ -54,14 +63,9 @@ export function addCellHighlight(view) {
 
     function touchHandler(event) {
         if (event.action === 'down') {
-            animation.play();
-            setTimeout(() => {
-                view.backgroundColor = new Color('transparent');
-            }, 500);
-        }
-        if (['up', 'cancel'].includes(event.action)) {
-            animation.cancel();
-            view.backgroundColor = new Color('transparent');
+            animation.play().then(() => {
+                animationOut.play()
+            });
         }
     }
 }

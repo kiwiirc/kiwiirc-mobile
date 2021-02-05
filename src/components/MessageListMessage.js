@@ -49,9 +49,9 @@ export default {
                             component: MessageListUrlPreview,
                             props: attach,
                             on: {
-                                tap: (event) => {
+                                openUrl: (url) => {
                                     if (typeof context.listeners.openUrl === 'function') {
-                                        context.listeners.openUrl(attach.url);
+                                        context.listeners.openUrl(url);
                                     }
                                 },
                             },
@@ -68,13 +68,6 @@ export default {
                 component: FormattedMessage,
                 props: {
                     blocks: message.blocks,
-                },
-                on: {
-                    tap: (event) => {
-                        if (typeof context.listeners.openMessageOptions === 'function') {
-                            context.listeners.openMessageOptions(event, message);
-                        }
-                    },
                 },
             });
         }
