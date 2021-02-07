@@ -701,7 +701,7 @@ function fixScrollMomentum(listview) {
 }
 
 /* Messagelist traffic messages */
-.messagelist-item-traffic {
+.messagelist-item-traffic, .messagelist-item-mode, .messagelist-item-nick {
     text-align: left;
     background-color: rgba(162, 165, 167, 0.6);
     padding-top: 10;
