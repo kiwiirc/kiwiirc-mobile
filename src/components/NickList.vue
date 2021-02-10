@@ -85,6 +85,11 @@ export default {
                 nickMap[user.nick] = lowercaseNick;
                 if (!nickFilter || lowercaseNick.indexOf(nickFilter) !== -1) {
                     users.push(user);
+
+                    // This will set the user.colour before users are rendered.
+                    // Otherwise, the user colour would be set as elements are
+                    // rendered, which causes lots of listview refreshes.
+                    user.getColour();
                 }
             }
 
