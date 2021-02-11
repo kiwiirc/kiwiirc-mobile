@@ -156,7 +156,12 @@ export default {
                     // eslint-disable-next-line global-require
                     const InputAccessoryView = require('./commons/InputAccessoryView')
                         .InputAccessoryView;
-                    textFieldView.ios.inputAccessoryView = InputAccessoryView.alloc().init({
+                    console.log('before init');
+                    // const test = { keyboardPositionChanged: (position) => {} }
+                    // const a = InputAccessoryView.alloc().init(test);
+                    // console.log('after init')
+                    textFieldView.ios.inputAccessoryView = InputAccessoryView.alloc().initWithFrame(CGRectZero);
+                    textFieldView.ios.inputAccessoryView.delegate = {
                         keyboardPositionChanged: (position) => {
                             if (!controlInputNativeView.ios.window) {
                                 return;
@@ -177,7 +182,7 @@ export default {
                                 translateY
                             );
                         },
-                    });
+                    };
                 }
 
                 // keep the keyboard after the user presses enter or send.

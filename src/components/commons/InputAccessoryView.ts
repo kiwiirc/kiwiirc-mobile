@@ -8,26 +8,24 @@
  * https://github.com/signalapp/Signal-iOS/blob/master/Signal/src/views/InputAccessoryViewPlaceholder.swift)
  */
 
-const InputAccessoryView = (UIView as any).extend({
-    init: function(delegate: Object) {
-        var self = this.super.initWithFrame(CGRectZero);
-        if (self) {
-            // The base class initialized successfully
-            self.delegate = delegate;
-        }
-        return self;
-    },
-    deinit: function() {
+type KeyboardPositionDelegate = { keyboardPositionChanged: (position: Number) => void };
+
+@NativeClass()
+export class InputAccessoryView extends UIView {
+    private delegate: KeyboardPositionDelegate;
+
+    deinit() {
         if (this.superview) {
             this.superview.removeObserverForKeyPath(this, 'center');
         }
-    },
+    }
+
     willMoveToSuperview(newSuperview?: UIView) {
         // This event triggers when the InputAccessoryView is being attached or detached.
         // This is where we add/remove the observers.
 
         // we observe the 'center' of the superview.
-        this.super.willMoveToSuperview(newSuperview);
+        super.willMoveToSuperview(newSuperview);
 
         if (this.superview) {
             console.log("Removing observer willMoveToSuperview");
@@ -48,8 +46,9 @@ const InputAccessoryView = (UIView as any).extend({
                 null
             );
         }
-    },
-    observeValueForKeyPathOfObjectChangeContext: function(
+    }
+
+    observeValueForKeyPathOfObjectChangeContext(
         path: string,
         obj: Object,
         change: NSDictionary<any, any>,
@@ -57,8 +56,9 @@ const InputAccessoryView = (UIView as any).extend({
     ): void {
         const visibleKeyboardHeight = this.getVisibleKeyboardHeight();
         this.delegate.keyboardPositionChanged(visibleKeyboardHeight);
-    },
-    getVisibleKeyboardHeight: function(): Number {
+    }
+
+    getVisibleKeyboardHeight(): Number {
         // Returns the visible height of the keyboard.
         if (!this.superview) {
             return 0;
@@ -75,7 +75,6 @@ const InputAccessoryView = (UIView as any).extend({
 
         // The onscreen region represents the overlap.
         return Math.max(0, keyboardFrame.size.height - offScreenHeight);
-    },
-});
+    }
+}
 
-export { InputAccessoryView };
