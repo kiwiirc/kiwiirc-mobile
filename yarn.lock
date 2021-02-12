@@ -3,23 +3,23 @@
 
 
 "@babel/runtime@^7.3.1":
-  version "7.12.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
-  integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
+  version "7.12.13"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.13.tgz#0a21452352b02542db0ffb928ac2d3ca7cb6d66d"
+  integrity sha512-8+3UMPBrjFa/6TtKi/7sehPKqfAm4g6K+YQjyyFOLUTxzOngcRZTlAVY8sc2CORJYqdHQY8gRPHmn+qo15rCBw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
 "@electron/get@^1.0.1":
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.12.2.tgz#6442066afb99be08cefb9a281e4b4692b33764f3"
-  integrity sha512-vAuHUbfvBQpYTJ5wB7uVIDq5c/Ry0fiTBMs7lnEYAo/qXXppIVcWdfBr57u6eRnKdVso7KSiH6p/LbQAG6Izrg==
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.12.4.tgz#a5971113fc1bf8fa12a8789dc20152a7359f06ab"
+  integrity sha512-6nr9DbJPUR9Xujw6zD3y+rS95TyItEVM0NVjt1EehY2vUWfIgPiIPVHxCvaTS0xr2B+DRxovYVKbuOWqC35kjg==
   dependencies:
     debug "^4.1.1"
     env-paths "^2.2.0"
     fs-extra "^8.1.0"
     got "^9.6.0"
     progress "^2.0.3"
-    sanitize-filename "^1.6.2"
+    semver "^6.2.0"
     sumchecker "^3.0.1"
   optionalDependencies:
     global-agent "^2.0.2"
@@ -36,9 +36,9 @@
   integrity sha512-IDPq3MDelDSZufhPZQHBYYPutJp4YcEeOCLhpFHAtQb2yLOa+sUQ6E54pcICNIimBtJh+99sggR3OE0R1tb3JQ==
 
 "@nativescript/core@^7.1.2":
-  version "7.1.3"
-  resolved "https://registry.yarnpkg.com/@nativescript/core/-/core-7.1.3.tgz#dfc27474ea3947987338056b949380b9efb2d4c1"
-  integrity sha512-UmsJvI2erL8Z5rINPMzAf9GmXqPnd+HNr15JLnQSywmnyOGZPxXFMm51W3/2lbRTERyPbiUduK3YMCzXMz5OkQ==
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@nativescript/core/-/core-7.2.1.tgz#d8ab484333b56553cd3104257fd7ea8b4a32695b"
+  integrity sha512-Aaw2t2HqCUwy0qeKop+Lg5667lcW5Zp4QQlrnTgUJsKSIABNeUXfYjbr7qzOO/4mHM4aETWQXTA8HKBJyxBdkQ==
   dependencies:
     "@nativescript/hook" "~2.0.0"
     css-tree "^1.0.0-alpha.39"
@@ -58,23 +58,23 @@
   resolved "https://registry.yarnpkg.com/@nativescript/theme/-/theme-3.0.1.tgz#fabc676638c22a63932e300ba23acc51f228e9ad"
   integrity sha512-5rduFdEjjGyUgK+jaJ/2EHxi+qAgTZuK9XgfxHw0KJAIIWP9HNL8JV8IVUBeIodRPHhSJZJVQT7t+8peH/4dVQ==
 
-"@nativescript/types-android@7.1.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@nativescript/types-android/-/types-android-7.1.0.tgz#7ca5b14fe3b60ae82d701b7145e10f3b4340c9cb"
-  integrity sha512-V8DfQMcYb6780sJ+SHbDvHyt/N5MENq5Ywz2YWx3ATY/WNz2x0L9r2YA88/HmG5TPAu3aE5qoq7R698gYcE7og==
+"@nativescript/types-android@7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@nativescript/types-android/-/types-android-7.2.0.tgz#70cc549c67110937618fbe3ccb8089d4d2e264c3"
+  integrity sha512-QwmyOschLSrV6tK+WMv3LkiQfZgJpFuyioWXgEB8Ubmja8QSfuxhv+wAtvKs6geCcNirvxy1n4U1xUqmBKbpIw==
 
-"@nativescript/types-ios@7.1.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@nativescript/types-ios/-/types-ios-7.1.0.tgz#7c42b93d17cb52ffbae421f2da0f3158dc8072bf"
-  integrity sha512-IpSqfOWXoh2M4+ZJIJwKBHRj9IUnTuj8YVjCImK5WBw2i525dRZwAqtK8csGGV5/yNFKiNz8ophd/hsMBW+8RA==
+"@nativescript/types-ios@7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@nativescript/types-ios/-/types-ios-7.2.0.tgz#97396968bfe4eccfcffdf9377a7c02bfb0a011ae"
+  integrity sha512-9q7bRyhte8bPzBzAE1eaRjUpcj7WJ772HF3dgZfA8bI2TCO9vfHnjtNVpKOCNqQke8iaPN+pIN0c2VfNTu7jRA==
 
 "@nativescript/types@^7.1.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@nativescript/types/-/types-7.1.0.tgz#877da25be33568a7f3818968c8af07b1cba9db1c"
-  integrity sha512-/oh/FfPs8hd81jiel8I40cU2vpR7dNimbWn4gyuJ5+lbIP22vYIOAEweS+IXdz19b/N1T3n5RgdcEkzsOasKlA==
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@nativescript/types/-/types-7.2.0.tgz#104ae9dfd9c1bd603e05fcad9bc32bad5fff1d04"
+  integrity sha512-RzmPEwsJQB25ZgMm5UFbTFZWbJtZnEsICBn7wavU87QveAt02ZGzEaJGXNevaV1HoUms22/YsWrBsOcePmTV4A==
   dependencies:
-    "@nativescript/types-android" "7.1.0"
-    "@nativescript/types-ios" "7.1.0"
+    "@nativescript/types-android" "7.2.0"
+    "@nativescript/types-ios" "7.2.0"
 
 "@nstudio/nativescript-checkbox@^2.0.4":
   version "2.0.4"
@@ -106,24 +106,24 @@
     defer-to-connect "^1.0.1"
 
 "@triniwiz/nativescript-toasty@^4.0.4":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@triniwiz/nativescript-toasty/-/nativescript-toasty-4.1.1.tgz#b03209e69b53f41648741b0f0fce4469f7121a6d"
-  integrity sha512-lEDlK1kNohBZZTeIz9Fkkzk1OS2sm6wcy470CCTRLvuihdHozPxeqBuw6K6lwmokxRUDKFMWfLdB1qr3HXVv+g==
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@triniwiz/nativescript-toasty/-/nativescript-toasty-4.1.3.tgz#c1261718e552a1d2509489751cbc96b37382fe89"
+  integrity sha512-ps3dXEVb5Pz2MFEY4Pu9G9l3co9vu6QVoapEm3CSHYRYvBbfGuB2tP+Gmqy0RCHaTPN7i6f2gHieiP3zM/YOSg==
 
 "@types/node@^12.0.12":
-  version "12.19.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.19.14.tgz#59e5029a3c2aea34f68b717955381692fd47cafb"
-  integrity sha512-2U9uLN46+7dv9PiS8VQJcHhuoOjiDPZOLAt0WuA1EanEknIMae+2QbMhayF7cgGqjvRVIfNpt+6jLPczJZFiRw==
+  version "12.19.16"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.19.16.tgz#15753af35cbef636182d8d8ca55b37c8583cecb3"
+  integrity sha512-7xHmXm/QJ7cbK2laF+YYD7gb5MggHIIQwqyjin3bpEGiSuvScMQ5JZZXPvRipi1MwckTQbJZROMns/JxdnIL1Q==
 
 "@types/node@^14.6.2":
-  version "14.14.22"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.22.tgz#0d29f382472c4ccf3bd96ff0ce47daf5b7b84b18"
-  integrity sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
+  version "14.14.26"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.26.tgz#e40df24c957568f350cca04e63bfb1e1556d1cbf"
+  integrity sha512-skWxepWOs+VArEBWd2S/VR3wUavioIIx9/HzW+UJiIjtwa6+kNXdsOeq7FfxDXf56hIcL0ieo2brwMgBJ1+lhw==
 
 "@vue/devtools@^5.3.3":
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/@vue/devtools/-/devtools-5.3.3.tgz#167473f31d986af81ab8c02629c800186e97d51c"
-  integrity sha512-wfQm0YHmEj1KLClhIyz/OFuRBky4/ptS5p7OqeNYIzEqgX+/jhTWbyKWUizYyYyz8HVEn/vAQb1pfPeYeeQCSQ==
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/@vue/devtools/-/devtools-5.3.4.tgz#2c58e5bca175461a64b75974f35b7e635209bb25"
+  integrity sha512-W7eLCcmKlIssnQPAUwDelmSvRyUABB99LSvSH9a4EwlmWgvtWr9Ck4SqUQVJyjkL1f+kenSUNnAG6Euwuzrp6g==
   dependencies:
     cross-spawn "^5.1.0"
     electron "^7.0.0"
@@ -657,9 +657,9 @@ entities@^1.1.1, entities@~1.1.1:
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
 entities@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/entities/-/entities-2.1.0.tgz#992d3129cf7df6870b96c57858c249a120f8b8b5"
-  integrity sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
+  integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
 env-paths@^2.2.0:
   version "2.2.0"
@@ -880,9 +880,9 @@ got@^9.6.0:
     url-parse-lax "^3.0.0"
 
 graceful-fs@^4.1.6, graceful-fs@^4.2.0:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
-  integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
+  integrity sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==
 
 has-binary2@~1.0.2:
   version "1.0.3"
@@ -1214,9 +1214,9 @@ nativescript-hook@^0.2.1:
     mkdirp "^0.5.1"
 
 nativescript-inappbrowser@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/nativescript-inappbrowser/-/nativescript-inappbrowser-3.0.1.tgz#5803b7d60a927015a62a939939ba4692ffe53c6f"
-  integrity sha512-uN7I17k9lUavfEVXENXjPmLVjsu2nAAb1fidxv36qBu0uN8c2p+6WGvYzpBqX+LppWlxu8mZNO2FSZCgmNKZYg==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/nativescript-inappbrowser/-/nativescript-inappbrowser-3.0.2.tgz#30440ae312a99851e9662dff51f5b671b1b2de1c"
+  integrity sha512-Is6l0OFrtuo/K3gVMCg2pXBN7q6VRGWatr7zlCgwwLVocRkQHsMNNfmIAJcbK2e5STWUFmt8MZLtG5V9131Wgg==
 
 nativescript-menu@^1.0.3:
   version "1.1.7"
@@ -1524,17 +1524,15 @@ safe-buffer@^5.1.2:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sanitize-filename@^1.6.2:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/sanitize-filename/-/sanitize-filename-1.6.3.tgz#755ebd752045931977e30b2025d340d7c9090378"
-  integrity sha512-y/52Mcy7aw3gRm7IrcGDFx/bCk4AhRh2eI9luHOQM86nZsqwiRkkq2GekHXBBD+SmPidc8i2PqtYZl+pWJ8Oeg==
-  dependencies:
-    truncate-utf8-bytes "^1.0.0"
-
 semver-compare@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/semver-compare/-/semver-compare-1.0.0.tgz#0dee216a1c941ab37e9efb1788f6afc5ff5537fc"
   integrity sha1-De4hahyUGrN+nvsXiPavxf9VN/w=
+
+semver@^6.2.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
+  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
 semver@^7.3.2:
   version "7.3.4"
@@ -1717,13 +1715,6 @@ toidentifier@1.0.0:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
 
-truncate-utf8-bytes@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/truncate-utf8-bytes/-/truncate-utf8-bytes-1.0.2.tgz#405923909592d56f78a5818434b0b78489ca5f2b"
-  integrity sha1-QFkjkJWS1W94pYGENLC3hInKXys=
-  dependencies:
-    utf8-byte-length "^1.0.1"
-
 ts-node@^8.10.2:
   version "8.10.2"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.10.2.tgz#eee03764633b1234ddd37f8db9ec10b75ec7fb8d"
@@ -1776,9 +1767,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 typescript@~3.9.0:
-  version "3.9.7"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
-  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+  version "3.9.9"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.9.tgz#e69905c54bc0681d0518bd4d587cc6f2d0b1a674"
+  integrity sha512-kdMjTiekY+z/ubJCATUPlRDl39vXYiMV9iyeMuEuXZh2we6zz80uovNN2WlAxmmdE/Z/YQe+EbOEXB5RHEED3w==
 
 universalify@^0.1.0:
   version "0.1.2"
@@ -1804,11 +1795,6 @@ url-parse@1.4.7, url-parse@^1.4.7:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
-
-utf8-byte-length@^1.0.1:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/utf8-byte-length/-/utf8-byte-length-1.0.4.tgz#f45f150c4c66eee968186505ab93fcbb8ad6bf61"
-  integrity sha1-9F8VDExm7uloGGUFq5P8u4rWv2E=
 
 util-deprecate@~1.0.1:
   version "1.0.2"
@@ -1838,9 +1824,9 @@ wrappy@1:
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
 ws@~7.4.2:
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.2.tgz#782100048e54eb36fe9843363ab1c68672b261dd"
-  integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.3.tgz#1f9643de34a543b8edb124bdcbc457ae55a6e5cd"
+  integrity sha512-hr6vCR76GsossIRsr8OLR9acVVm1jyfEWvhbNjtgPOrfvAlKzvyeg/P6r8RuDjRyrcQoPQT7K0DGEPc7Ae6jzA==
 
 xmlbuilder@8.2.2:
   version "8.2.2"

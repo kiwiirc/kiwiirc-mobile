@@ -1,13 +1,14 @@
 {
     "name": "kiwiirc-app",
+    "main": "main.js",
     "version": "1.0.0",
     "versionNumber": "1",
     "description": "Kiwi IRC mobile client",
     "dependencies": {
-        "@nativescript/core": "^7.1.2",
+        "@nativescript/core": "~7.1.2",
         "kiwiirc-mobile": "../",
         "nativescript-dev-version": "git+https://github.com/tralves/nativescript-dev-version.git",
-        "nativescript-vue": "2.8.0"
+        "nativescript-vue": "~2.8.0"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
@@ -30,6 +31,5 @@
         "null-loader": "^0.1.1",
         "typescript": "^3.5.3",
         "vue-loader": "15.9.3"
-    },
-    "main": "main"
+    }
 }

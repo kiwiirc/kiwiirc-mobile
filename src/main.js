@@ -141,7 +141,7 @@ function loadGlobalComponents() {
                 event: 'checkedChange',
             },
         }
-);
+    );
 
     Vue.directive('dismissesIOSKeyboard', {
         bind(el, binding) {
