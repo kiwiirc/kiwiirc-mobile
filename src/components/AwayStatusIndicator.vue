@@ -1,41 +1,44 @@
-<template>
-    <label
-        v-if="shouldShowStatus"
-        :class="{ away: user && user.away }"
-        class="awaystatusindicator"
-        @tap="toggleSelfAway()"
-    />
-</template>
-
 <script>
 'kiwi public';
 
 export default {
+    functional: true,
     props: ['network', 'user', 'toggle'],
-    computed: {
-        isUserSelf() {
-            if (this.toggle === false) {
-                return false;
-            }
-            let user = this.$state.getUser(this.network.id, this.network.nick);
-            return this.user === user;
-        },
-        shouldShowStatus() {
-            if (!this.network || this.network.state !== 'connected' || !this.user) {
-                return false;
-            }
+    render(createElement, context) {
+        const network = context.props.network;
+        const user = context.props.user;
+        if (!network || network.state !== 'connected' || !user) {
+            return null;
+        }
 
-            let awayNotifyEnabled = this.network.ircClient.network.cap.isEnabled('away-notify');
-            return this.$state.setting('buffers.who_loop') || awayNotifyEnabled;
-        },
-    },
-    methods: {
-        toggleSelfAway() {
-            if (this.isUserSelf) {
-                let val = this.user.away;
-                this.network.ircClient.raw('AWAY', val ? '' : 'Currently away');
+        let awayNotifyEnabled = network.ircClient.network.cap.isEnabled('away-notify');
+        if (!(network.appState.setting('buffers.who_loop') || awayNotifyEnabled)) {
+            return null;
+        }
+
+        const listners = {};
+        const toggleable = context.props.toggle &&
+            network.appState.getUser(network.id, network.nick) === user;
+
+        if (toggleable) {
+            listners.tap = () => {
+                network.ircClient.raw('AWAY', user.away ? '' : 'Currently away');
             }
-        },
+        } 
+
+        return createElement('label', {
+            staticClass: context.data.staticClass,
+            directives: context.data.directives,
+            class: {
+                'away': user.away,
+                'awaystatusindicator': true,
+                ...context.data.class
+            },
+            attrs: {
+                ...context.data.attrs,
+            },
+            on: listners,
+        });
     }
 };
 </script>
