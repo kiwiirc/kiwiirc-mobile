@@ -27,7 +27,7 @@
         "nativescript-dev-version": "git+https://github.com/tralves/nativescript-dev-version.git",
         "nativescript-inappbrowser": "^3.0.1",
         "nativescript-menu": "^1.0.3",
-        "nativescript-plugin-universal-links": "^2.0.0",
+        "nativescript-plugin-universal-links": "https://github.com/tralves/nativescript-plugin-universal-links/raw/master/dist/nativescript-plugin-universal-links.tar.gz",
         "nativescript-socketio": "^3.3.1",
         "nativescript-sound-kak": "^1.2.0",
         "nativescript-themes": "https://github.com/tralves/nativescript-themes/raw/master/nativescript-themes.tar.gz",
