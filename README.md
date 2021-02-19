@@ -7,6 +7,10 @@ An open source IRC client for iOS and Android built using [NativeScript-Vue](htt
 - Themeable
 - Customiseable through the plugin system
 
+| ![login](./docs/img/login.png) | ![State Browser](./docs/img/state-browser.png) | ![Chat](./docs/img/chat.png) | ![Channel Search](./docs/img/channel-search.png) | ![Add network](./docs/img/new-network.png) |
+| :------------: | :---------: | :---------: | :---------: | :---------: | 
+| Login            | State Browser     | Chat     | Channel Search   | Add network     | 
+
 ## Getting started
 
 ### Prerequisites
