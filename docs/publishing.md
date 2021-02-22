@@ -1,13 +1,21 @@
 # Publishing
 
-## Android
+## Prepare
+
+Run:
+
+```bash
+ns clean
+```
+
+### Android
 
 Running `ns build android` will create an Android project under `platforms/android`. This project
 can be opened in Android Studio and published in the Play Store [like any other Android app](http://developer.android.com/tools/publishing/publishing_overview.html).
 
 You can also find more information on building a signed release `.apk` [here](https://docs.nativescript.org/tooling/publishing/publishing-android-apps).
 
-## iOS
+### iOS
 
 Running `ns prepare ios --release` will generate an Xcode project at `/platforms/ios/kiwiirc-app.xcworkspace`. You can open this project on Xcode and publish it [like any other iOS app](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/Introduction/Introduction.html).
 
