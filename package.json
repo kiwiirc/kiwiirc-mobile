@@ -24,7 +24,6 @@
         "i18next-conv": "^8.0.1",
         "lodash": "^4.17.15",
         "nativescript-clipboard": "2.0.0",
-        "nativescript-dev-version": "git+https://github.com/tralves/nativescript-dev-version.git",
         "nativescript-inappbrowser": "^3.0.1",
         "nativescript-menu": "^1.0.3",
         "nativescript-plugin-universal-links": "https://github.com/tralves/nativescript-plugin-universal-links/raw/master/dist/nativescript-plugin-universal-links.tar.gz",

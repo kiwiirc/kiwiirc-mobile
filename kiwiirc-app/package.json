@@ -7,7 +7,7 @@
     "dependencies": {
         "@nativescript/core": "~7.1.2",
         "kiwiirc-mobile": "../",
-        "nativescript-dev-version": "git+https://github.com/tralves/nativescript-dev-version.git",
+        "nativescript-dev-version": "git+https://github.com/tralves/nativescript-dev-version.git#ns7-update",
         "nativescript-vue": "~2.8.0"
     },
     "devDependencies": {
