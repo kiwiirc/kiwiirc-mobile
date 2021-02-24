@@ -290,7 +290,7 @@ async function initPlugins() {
             continue;
         }
 
-        const pluginFileName = fs.path.join(appPath, pluginDefinition.url);
+        const pluginFileName = path.join(appPath, pluginDefinition.url);
         if (!FSA.fileExists(pluginFileName)) {
             log.error(`Plugin ${pluginDefinition.name} file ${pluginFileName} not found.`);
             continue;
