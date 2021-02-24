@@ -23,6 +23,10 @@ export default {
 </script>
 
 <style lang="scss">
+.autocomplete {
+    background-color: #34383a44;
+}
+
 .autocomplete-item-value {
     margin: 10 10;
     padding: 5;
