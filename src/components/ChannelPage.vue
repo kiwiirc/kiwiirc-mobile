@@ -15,29 +15,23 @@
             @titleTap="openChannelSettings"
             @loadingTap="loadingTap"
         />
-        <rad-side-drawer
+        <drawer
             ref="drawer"
-            :drawerLocation="drawerLocation"
-            @drawerOpened="
-                isNicklistOpen = true;
-                closeKeyboard();
-            "
-            @drawerClosed="
-                isNicklistOpen = false;
-                closeKeyboard();
-            "
+            @open="closeKeyboard()"
+            @close="closeKeyboard()"
         >
             <nick-list
                 ref="nick-list"
                 :buffer="buffer"
-                ~drawerContent
+                ~rightDrawer
             />
+
             <buffer-chat
                 ref="buffer-chat"
                 :buffer="buffer"
                 ~mainContent
             />
-        </rad-side-drawer>
+        </drawer>
     </page>
 </template>
 
@@ -47,7 +41,6 @@
 import _ from 'lodash';
 
 import { Menu } from 'nativescript-menu';
-import { SideDrawerLocation } from 'nativescript-ui-sidedrawer';
 
 import NickList from './NickList';
 import BufferChat from './BufferChat';
@@ -63,11 +56,6 @@ export default {
         BufferChat,
     },
     props: ['buffer'],
-    data() {
-        return {
-            isNicklistOpen: false,
-        };
-    },
     computed: {
         windowTitle() {
             return _.get(this, 'buffer.name', this.$state.settings.windowTitle);
@@ -77,8 +65,6 @@ export default {
         },
     },
     created() {
-        this.drawerLocation = SideDrawerLocation.Right;
-
         this.listen(this.$state, 'sidebar.show', this.openSidebar);
         this.listen(this.$state, 'sidebar.hide', this.closeSidebar);
         this.listen(this.$state, 'sidebar.toggle', this.toggleSidebar);
@@ -141,46 +127,46 @@ export default {
             })
                 .then((value) => {
                     switch (value.id) {
-                    case 'leave_channel':
-                        // eslint-disable-next-line no-restricted-globals, no-alert
-                        confirm({
-                            title: leaveOptionText,
-                            message: this.$t('prompt_leave_channel'),
-                            okButtonText: this.$t('yes'),
-                            cancelButtonText: this.$t('no'),
-                        }).then((result) => {
-                            if (result) {
-                                this.closeBuffer();
-                                this.$navigateBack();
-                            }
-                        });
-                        break;
-                    case 'banned_users':
-                        this.$navigateTo(ChannelBanlist, {
-                            props: {
-                                buffer: this.buffer,
-                            },
-                        });
-                        break;
-                    case 'invite_users':
-                        this.$navigateTo(ChannelInvitelist, {
-                            props: {
-                                buffer: this.buffer,
-                            },
-                        });
-                        break;
-                    case 'channel_settings':
-                        this.openChannelSettings();
-                        break;
-                    case 'notifications':
-                        this.$navigateTo(BufferSettings, {
-                            props: {
-                                buffer: this.buffer,
-                            },
-                        });
-                        break;
-                    default:
-                        break;
+                        case 'leave_channel':
+                            // eslint-disable-next-line no-restricted-globals, no-alert
+                            confirm({
+                                title: leaveOptionText,
+                                message: this.$t('prompt_leave_channel'),
+                                okButtonText: this.$t('yes'),
+                                cancelButtonText: this.$t('no'),
+                            }).then((result) => {
+                                if (result) {
+                                    this.closeBuffer();
+                                    this.$navigateBack();
+                                }
+                            });
+                            break;
+                        case 'banned_users':
+                            this.$navigateTo(ChannelBanlist, {
+                                props: {
+                                    buffer: this.buffer,
+                                },
+                            });
+                            break;
+                        case 'invite_users':
+                            this.$navigateTo(ChannelInvitelist, {
+                                props: {
+                                    buffer: this.buffer,
+                                },
+                            });
+                            break;
+                        case 'channel_settings':
+                            this.openChannelSettings();
+                            break;
+                        case 'notifications':
+                            this.$navigateTo(BufferSettings, {
+                                props: {
+                                    buffer: this.buffer,
+                                },
+                            });
+                            break;
+                        default:
+                            break;
                     }
                 })
                 .catch(console.log);
@@ -189,13 +175,13 @@ export default {
             this.$state.removeBuffer(this.buffer);
         },
         toggleSidebar() {
-            this.$refs.drawer.toggleDrawerState();
+            this.$refs.drawer.toggle();
         },
         openSidebar() {
-            this.$refs.drawer.showDrawer();
+            this.$refs.drawer.open();
         },
         closeSidebar() {
-            this.$refs.drawer.closeDrawer();
+            this.$refs.drawer.close();
         },
         openChannelSettings() {
             this.$navigateTo(ChannelSettings, {

@@ -9,7 +9,8 @@ import VueI18Next from '@panter/vue-i18next';
 import Logger from '@/libs/Logger';
 
 // global components
-import RadSideDrawer from 'nativescript-ui-sidedrawer/vue';
+import { install as drawerInstall } from '@nativescript-community/ui-drawer';
+import DrawerPlugin from '@nativescript-community/ui-drawer/vue'
 import LoaderPage from '@mobile/components/startups/LoaderPage';
 
 import AwayStatusIndicator from '@mobile/components/AwayStatusIndicator';
@@ -129,7 +130,8 @@ function loadGlobalComponents() {
     Vue.component('IconTextField', IconTextField);
     Vue.component('KiwiDropdown', KiwiDropdown);
 
-    Vue.use(RadSideDrawer);
+    Vue.use(DrawerPlugin);
+    drawerInstall();
 
     Vue.registerElement(
         'CheckBox',

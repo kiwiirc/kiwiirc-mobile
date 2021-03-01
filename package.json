@@ -8,6 +8,7 @@
         "setup": "git submodule update --init --recursive && yarn && cd kiwiirc && yarn && ns doctor"
     },
     "dependencies": {
+        "@nativescript-community/ui-drawer": "^0.0.24",
         "@nativescript/appversion": "^2.0.0",
         "@nativescript/background-http": "^5.0.1",
         "@nativescript/theme": "^3.0.1",
@@ -30,7 +31,6 @@
         "nativescript-socketio": "^3.3.1",
         "nativescript-sound-kak": "^1.2.0",
         "nativescript-themes": "https://github.com/tralves/nativescript-themes/raw/master/nativescript-themes.tar.gz",
-        "nativescript-ui-sidedrawer": "^9.0.3",
         "nativescript-vibrate": "^4.0.1",
         "nativescript-vue-devtools": "^1.4.0",
         "nativescript-websockets": "^1.5.2",
