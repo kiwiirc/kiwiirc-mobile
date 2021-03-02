@@ -1,9 +1,9 @@
 <template>
     <grid-layout
-        class="nicklist-filter p-0 m-0"
+        class="nicklist-filter"
         height="50"
         columns="auto, *, 40"
-        android:paddingRight="30"
+        android:paddingRight="10"
         @tap="toggleUserFilter"
     >
         <label
@@ -33,7 +33,7 @@
         />
         <button
             col="2"
-            class="nicklist-usercount-search fas btn btn-text"
+            class="nicklist-usercount-search fas btn btn-text m-0 p-0"
             :text="filter_visible || value ? '' : ''"
             @tap="toggleUserFilter"
         />
@@ -58,16 +58,23 @@ export default {
             filter_visible: false,
         };
     },
-    methods: {
-        toggleUserFilter() {
+    created() {
+        this.toggleUserFilter = _.throttle(() => {
             this.filter_visible = !this.filter_visible;
             if (this.filter_visible) {
-                this.$nextTick(() => this.$refs.user_filter.nativeView.focus());
+                this.$nextTick(() => {
+                    this.$refs.user_filter.nativeView.focus();
+                    setTimeout(() => this.$state.$emit('sidebar.show'));
+                });
             } else {
                 this.$emit('input', '');
                 this.blur();
+                this.$state.$emit('sidebar.show');
+                setTimeout(() => this.$state.$emit('sidebar.show'));
             }
-        },
+        }, 200, { trailing: false });
+    },
+    methods: {
         onFilterBlur() {
             if (!this.user_filter) {
                 this.filter_visible = false;
@@ -98,5 +105,6 @@ export default {
 
 .nicklist-usercount-search {
     color: var(--neutral4);
+    text-align: center;
 }
 </style>

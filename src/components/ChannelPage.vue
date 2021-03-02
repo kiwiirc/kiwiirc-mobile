@@ -17,13 +17,15 @@
         />
         <drawer
             ref="drawer"
-            @open="closeKeyboard()"
-            @close="closeKeyboard()"
+            @open="closeChatKeyboard"
+            @close="closeNicklistKeyboard"
+            android:gestureEnabled="false"
         >
             <nick-list
                 ref="nick-list"
                 :buffer="buffer"
                 ~rightDrawer
+                width="300"
             />
 
             <buffer-chat
@@ -44,7 +46,6 @@ import { Menu } from 'nativescript-menu';
 
 import NickList from './NickList';
 import BufferChat from './BufferChat';
-
 import ChannelBanlist from './ChannelBanlist';
 import ChannelInvitelist from './ChannelInvitelist';
 import ChannelSettings from './ChannelSettings';
@@ -79,10 +80,13 @@ export default {
     methods: {
         navigatingFrom() {
             this.closeSidebar();
-            this.closeKeyboard();
+            this.closeChatKeyboard();
+            this.closeNicklistKeyboard();
         },
-        closeKeyboard() {
+        closeChatKeyboard() {
             this.$refs['buffer-chat'] && this.$refs['buffer-chat'].cleanUp();
+        },
+        closeNicklistKeyboard() {
             this.$refs['nick-list'] && this.$refs['nick-list'].cleanUp();
         },
         openChannelMenu(event) {
