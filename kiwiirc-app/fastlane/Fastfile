@@ -84,6 +84,14 @@ platform :ios do
     beta_groups = ENV["BETA_GROUPS"].split(' ');
     print_version_type
 
+    app_store_connect_api_key(
+      key_id: ENV["KEY_ID"],
+      issuer_id: ENV["ISSUER_ID"],
+      key_filepath: Dir.pwd + ENV["KEY_FILEPATH"],
+      duration: 3600, 
+      in_house: false, 
+    )
+
     build
 
     upload_to_testflight(
