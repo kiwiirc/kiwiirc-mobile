@@ -831,6 +831,25 @@
     global-agent "^2.0.2"
     global-tunnel-ng "^2.7.1"
 
+"@nativescript-community/gesturehandler@^0.1.35":
+  version "0.1.36"
+  resolved "https://registry.yarnpkg.com/@nativescript-community/gesturehandler/-/gesturehandler-0.1.36.tgz#3474d718583012e41199d62007fa26abdeb32338"
+  integrity sha512-UXhiLxL8EurFGcDcnFJghPCfGeDgKtuNqvf9Wpeu9JMNO3hUkuGnzrripgyx89RtY52T77Kaykqtc5Ojgwwlfg==
+  dependencies:
+    "@nativescript-community/observable" "^2.0.8"
+
+"@nativescript-community/observable@^2.0.8":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@nativescript-community/observable/-/observable-2.0.9.tgz#64b2494272aac702fb149011108e112397e774b6"
+  integrity sha512-JsNztvBEdUH7I3+ECnIOOJ39J2sEdeaBSFk4JIkrsFeVGOx1E21SSJNkkQNN9H2BUsF9JgDoQ6rGKl3hmJkXTw==
+
+"@nativescript-community/ui-drawer@^0.0.24":
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/@nativescript-community/ui-drawer/-/ui-drawer-0.0.24.tgz#3e96af8a491bdc0d494657009e76f8838aa62498"
+  integrity sha512-Vv+ix4PMks88VFypWPRv/1OkKFyehRIbuJRi5/EjDVMMA5SOiDEmkBwxzKzglBEx2mq+VNT7/QGZ11WVxHD04g==
+  dependencies:
+    "@nativescript-community/gesturehandler" "^0.1.35"
+
 "@nativescript/android@7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@nativescript/android/-/android-7.0.1.tgz#940bdb054c33730114960b774b5df69a79de2168"
@@ -1339,6 +1358,11 @@ ansi-regex@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.1.0.tgz#8b9f8f08cf1acb843756a839ca8c7e3168c51997"
   integrity sha512-1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==
+
+ansi-regex@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
+  integrity sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
 
 ansi-styles@^2.2.1:
   version "2.2.1"
@@ -3568,17 +3592,6 @@ glob-parent@~5.1.0:
   dependencies:
     is-glob "^4.0.1"
 
-glob@^6.0.1:
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-6.0.4.tgz#0f08860f6a155127b2fadd4f9ce24b1aab6e4d22"
-  integrity sha1-DwiGD2oVUSey+t1PnOJLGqtuTSI=
-  dependencies:
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "2 || 3"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
 glob@^7.0.0, glob@^7.0.3, glob@^7.1.0, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@~7.1.1:
   version "7.1.6"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
@@ -4450,6 +4463,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
 kiwiirc-mobile@../:
   version "0.27.1"
   dependencies:
+    "@nativescript-community/ui-drawer" "^0.0.24"
     "@nativescript/appversion" "^2.0.0"
     "@nativescript/background-http" "^5.0.1"
     "@nativescript/theme" "^3.0.1"
@@ -4466,14 +4480,12 @@ kiwiirc-mobile@../:
     i18next-conv "^8.0.1"
     lodash "^4.17.15"
     nativescript-clipboard "2.0.0"
-    nativescript-dev-version "git+https://github.com/tralves/nativescript-dev-version.git"
     nativescript-inappbrowser "^3.0.1"
     nativescript-menu "^1.0.3"
-    nativescript-plugin-universal-links "^2.0.0"
+    nativescript-plugin-universal-links "https://github.com/tralves/nativescript-plugin-universal-links/raw/master/dist/nativescript-plugin-universal-links.tar.gz"
     nativescript-socketio "^3.3.1"
     nativescript-sound-kak "^1.2.0"
     nativescript-themes "https://github.com/tralves/nativescript-themes/raw/master/nativescript-themes.tar.gz"
-    nativescript-ui-sidedrawer "^9.0.3"
     nativescript-vibrate "^4.0.1"
     nativescript-vue-devtools "^1.4.0"
     nativescript-websockets "^1.5.2"
@@ -4828,7 +4840,7 @@ minimalistic-crypto-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
 
-"minimatch@2 || 3", minimatch@^3.0.4, minimatch@~3.0.2, minimatch@~3.0.4:
+minimatch@^3.0.4, minimatch@~3.0.2, minimatch@~3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -4987,21 +4999,13 @@ nativescript-clipboard@2.0.0:
   resolved "https://registry.yarnpkg.com/nativescript-clipboard/-/nativescript-clipboard-2.0.0.tgz#1ecac22a5bfc771a50a662958d7ef68d66177076"
   integrity sha512-w7qRJiWiBeq55f3IW+pAkbrl+v+yqZf3bhcl1wH6Qm1JqZLWDv7HemzHTM5CvaqQ4gfz5dnGhJW1q1fsr5KSOw==
 
-"nativescript-dev-version@git+https://github.com/tralves/nativescript-dev-version.git":
+"nativescript-dev-version@git+https://github.com/tralves/nativescript-dev-version.git#ns7-update":
   version "0.2.1"
-  resolved "git+https://github.com/tralves/nativescript-dev-version.git#16a507e682b3f687e0fda2a474303f2ff8033cc4"
+  resolved "git+https://github.com/tralves/nativescript-dev-version.git#96494802c27d313566791af9b65219ed1536b9b3"
   dependencies:
+    "@nativescript/hook" "~2.0.0"
     androidmanifest "^2.0.0"
-    nativescript-hook "^0.2.1"
     plist "^2.0.1"
-
-nativescript-hook@^0.2.1:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/nativescript-hook/-/nativescript-hook-0.2.5.tgz#ea85179ada2d619dcadc9dc32ec45bb5a3c6713e"
-  integrity sha512-ciGJtNbtMB2lGv8jAkUripkRjd3g8atX9VYPSt6e8PI6YPiOKeoma3xjcXoW66pFMYpHnfrbp6Mq9U/QtiQrVg==
-  dependencies:
-    glob "^6.0.1"
-    mkdirp "^0.5.1"
 
 nativescript-inappbrowser@^3.0.1:
   version "3.0.2"
@@ -5013,12 +5017,12 @@ nativescript-menu@^1.0.3:
   resolved "https://registry.yarnpkg.com/nativescript-menu/-/nativescript-menu-1.1.7.tgz#a626c3e4fc6bba1dde5bc1216cc303e0f7849062"
   integrity sha512-nKthc66vDkZx20Pvy3wExcxgo4poHU50+wP5gDcyNJGPJ2fh212gLyRYu0sjX6k6b9N7pWGvwBBFShMspqbXUQ==
 
-nativescript-plugin-universal-links@^2.0.0:
+"nativescript-plugin-universal-links@https://github.com/tralves/nativescript-plugin-universal-links/raw/master/dist/nativescript-plugin-universal-links.tar.gz":
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/nativescript-plugin-universal-links/-/nativescript-plugin-universal-links-2.0.0.tgz#4666c31ec3f947f43a8b674a90e23126ff76b09a"
-  integrity sha512-SsM1Gy9u4T0hQavkNudN8sezyXI7sfN6okpr1BeAamOxaR9eRHG5u/p6wczA4e5JqCvdyLip05ymVPTa8cFzHA==
+  resolved "https://github.com/tralves/nativescript-plugin-universal-links/raw/master/dist/nativescript-plugin-universal-links.tar.gz#ddc46431d81f3c7face695ef929eeb2a796b0491"
   dependencies:
     ts-node "^9.0.0"
+    ts-patch "^1.3.0"
     url-parse "1.4.7"
 
 nativescript-socketio@^3.3.1:
@@ -5034,19 +5038,6 @@ nativescript-sound-kak@^1.2.0:
 "nativescript-themes@https://github.com/tralves/nativescript-themes/raw/master/nativescript-themes.tar.gz":
   version "2.0.2"
   resolved "https://github.com/tralves/nativescript-themes/raw/master/nativescript-themes.tar.gz#7d1ea2a2867940f9651dc97e3f39af25bcce063c"
-
-nativescript-ui-core@~4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/nativescript-ui-core/-/nativescript-ui-core-4.0.0.tgz#3233973d3766ef76a0f27c86a1939ae5b5e43421"
-  integrity sha512-YbGZApyI84RGSevCmXVD18yGov7/RJyLcIXXx6p2y4WM41hL+uRxyUak/9qLP2vwSSy0bCZKXFoyYwsIcf8EoA==
-
-nativescript-ui-sidedrawer@^9.0.3:
-  version "9.0.3"
-  resolved "https://registry.yarnpkg.com/nativescript-ui-sidedrawer/-/nativescript-ui-sidedrawer-9.0.3.tgz#8f0c960fc8407220648ce8acc3ea2f662316e882"
-  integrity sha512-QFaTj1zRmdw8ZoNli4fpY1QgkJrW/Ms0JK9O8CORp1cHVRyJAyOjK0qvYej0/x6/N0QZpYZjqIJ5BSBG+0Gx6A==
-  dependencies:
-    nativescript-ui-core "~4.0.0"
-    ts-node "^8.10.2"
 
 nativescript-vibrate@^4.0.1:
   version "4.0.1"
@@ -6481,7 +6472,7 @@ shebang-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
 
-shelljs@~0.8.4:
+shelljs@^0.8.4, shelljs@~0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.4.tgz#de7684feeb767f8716b326078a8a00875890e3c2"
   integrity sha512-7gk3UZ9kOfPLIAbslLzyWeGiEqx9e3rxwZM0KE6EL8GlGwjym9Mrlx5/p33bWTu9YG6vcS4MBxYZDHYr5lr8BQ==
@@ -6843,6 +6834,13 @@ strip-ansi@^5.0.0, strip-ansi@^5.1.0, strip-ansi@^5.2.0:
   dependencies:
     ansi-regex "^4.1.0"
 
+strip-ansi@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
+  integrity sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
+  dependencies:
+    ansi-regex "^5.0.0"
+
 strip-bom@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-2.0.0.tgz#6219a85616520491f35788bdbf1447a99c7e6b0e"
@@ -7077,17 +7075,6 @@ ts-loader@^8.0.2:
     micromatch "^4.0.0"
     semver "^7.3.4"
 
-ts-node@^8.10.2:
-  version "8.10.2"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.10.2.tgz#eee03764633b1234ddd37f8db9ec10b75ec7fb8d"
-  integrity sha512-ISJJGgkIpDdBhWVu3jufsWpK3Rzo7bdiIXJjQc0ynKxVOVcg2oIrf2H2cejminGrptVc6q6/uynAHNCuWGbpVA==
-  dependencies:
-    arg "^4.1.0"
-    diff "^4.0.1"
-    make-error "^1.1.1"
-    source-map-support "^0.5.17"
-    yn "3.1.1"
-
 ts-node@^9.0.0:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-9.1.1.tgz#51a9a450a3e959401bda5f004a72d54b936d376d"
@@ -7099,6 +7086,17 @@ ts-node@^9.0.0:
     make-error "^1.1.1"
     source-map-support "^0.5.17"
     yn "3.1.1"
+
+ts-patch@^1.3.0:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/ts-patch/-/ts-patch-1.3.2.tgz#150770067f0767cbd4240ef3625190f9088db8eb"
+  integrity sha512-FpxqNCn03XJHRLa/9GinQl7dAg6XIfxQ80KaJgsGfB1CpmgA2x128Rsg6LaU0b/eUSQltDtuP7/dhFZMusBqeA==
+  dependencies:
+    chalk "^4.1.0"
+    global-prefix "^3.0.0"
+    minimist "^1.2.5"
+    shelljs "^0.8.4"
+    strip-ansi "^6.0.0"
 
 tslib@^1.9.0:
   version "1.14.1"
