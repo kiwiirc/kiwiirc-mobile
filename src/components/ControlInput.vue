@@ -61,6 +61,7 @@
 import _ from 'lodash';
 import { isIOS, isAndroid } from 'tns-core-modules/platform';
 
+import autocompleteCommands from '@web/res/autocompleteCommands';
 import Logger from '@/libs/Logger';
 import GlobalApi from '@mobile/libs/GlobalApi';
 
@@ -89,7 +90,7 @@ export default {
             return this.buffer.getNetwork();
         },
         allAutoCompleteItems() {
-            let list = [];
+            let list = [...this.commands];            
 
             if (!this.buffer) {
                 return list;
@@ -143,6 +144,27 @@ export default {
     created() {
         this.listen(this.$state, 'controlinput.insertNick', (nick) => {
             this.insertNick(nick);
+        });
+
+        // prepare command list for autocomplete
+        this.commands = [];
+        
+        autocompleteCommands.forEach((command) => {
+            // allow descriptions to be translation keys or static strings
+            this.commands.push({
+                text: '/' + command.command,
+                type: 'command',
+            });
+
+            if (command.alias) {
+                const alias = command.alias.map(a => {
+                    return {
+                        text: '/' + a, 
+                        type: 'command'
+                    }
+                });
+                this.commands.push(...alias);
+            }
         });
     },
     methods: {
