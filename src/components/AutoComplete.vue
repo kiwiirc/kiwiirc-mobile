@@ -7,7 +7,8 @@
             <label
                 v-for="item in props.items"
                 :key="item.text"
-                class="autocomplete-item-value"
+                class="autocomplete-item"
+                :class="'autocomplete-item--' + item.type"
                 @tap="listeners.selected(item, $event)"
             >{{ item.text }}</label>
         </stack-layout>
@@ -23,7 +24,11 @@ export default {
 </script>
 
 <style lang="scss">
-.autocomplete-item-value {
+.autocomplete {
+    background-color: #34383a44;
+}
+
+.autocomplete-item {
     margin: 10 10;
     padding: 5;
     background-color: var(--neutral1);
@@ -31,4 +36,10 @@ export default {
     border-radius: 5;
     color: var(--default-fg);
 }
+
+.autocomplete-item--command {
+    background-color: var(--neutral5);
+    color: var(--neutral2);
+}
+
 </style>
