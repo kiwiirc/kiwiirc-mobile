@@ -19,7 +19,7 @@ import { alert } from '@nativescript/core/ui/dialogs';
 import * as appversion from '@nativescript/appversion';
 import * as Sound from "nativescript-sound-kak";
 import Themes from 'nativescript-themes';
-import InAppBrowser from 'nativescript-inappbrowser';
+import { InAppBrowser } from 'nativescript-inappbrowser';
 import { getUniversalLink, registerUniversalLinkCallback } from 'nativescript-plugin-universal-links';
 
 import i18next from 'i18next';
@@ -470,6 +470,7 @@ function initMediaViewer() {
                 Utils.openUrl(url);
             }
         } catch (error) {
+            console.error(error);
             InAppBrowser.close();
             await alert({
                 title: 'Error',
