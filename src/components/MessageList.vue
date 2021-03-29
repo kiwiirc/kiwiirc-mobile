@@ -418,12 +418,15 @@ export default {
                             this.$state.$emit('mediaviewer.show', action.value);
                             break;
                         case 'user':
-                            this.$state.$emit('userbox.show',
-                                action.value,
-                                {
-                                    network: this.network,
-                                    buffer: this.buffer,
-                                });
+                            // TODO: SHow a warning or something if this user no longer exists
+                            if (action.value) {
+                                this.$state.$emit('userbox.show',
+                                    action.value,
+                                    {
+                                        network: this.network,
+                                        buffer: this.buffer,
+                                    });
+                            }
                             break;
                         case 'channel':
                             this.$state.addBuffer(
