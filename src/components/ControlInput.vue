@@ -367,7 +367,6 @@ export default {
             };
         },
         blur() {
-            log('huhu when I hear heavy metal!');
             this.$refs.textInput.nativeView.dismissSoftInput();
             if (isIOS) {
                 this.$refs.textInput.nativeView.ios.resignFirstResponder();

@@ -76,13 +76,11 @@ Vue.mixin({
 
 export function startApp() {
     Application.on(Application.uncaughtErrorEvent, (args) => {
-        console.log('main Application.uncaughtErrorEvent', args.eventName, args.error);
-        log.error(args.eventName, args.error);
+        console.log('[Application uncaughtErrorEvent]', args.eventName, args.error);
     });
 
     Vue.config.errorHandler = (err, vm, info) => {
-        console.log('main Vue.config.errorHandler', err.message + '\n' + err.stack);
-        log.error(err.message + '\n' + err.stack);
+        console.log('[Vue errorHandler]', err.message + '\n' + err.stack);
     };
 
     initLocalization();
