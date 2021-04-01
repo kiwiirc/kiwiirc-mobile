@@ -118,7 +118,7 @@
 <script>
 'kiwi public';
 
-import { device } from 'tns-core-modules/platform';
+import { Device } from '@nativescript/core';
 
 export default {
     props: ['buffer'],
@@ -135,7 +135,7 @@ export default {
                     // If this buffer is on a BOUNCER account, update the setting there too
                     const bufferName = this.buffer.name;
                     network.ircClient.raw(
-                        `BOUNCER changebuffer ${netId} ${bufferName} push_device_uuid=${device.uuid};notify=${val}`
+                        `BOUNCER changebuffer ${netId} ${bufferName} push_device_uuid=${Device.uuid};notify=${val}`
                     );
                 }
 

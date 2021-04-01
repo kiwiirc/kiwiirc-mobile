@@ -96,11 +96,10 @@
 <script>
 'kiwi public';
 
-import { device } from 'tns-core-modules/platform';
-import { GestureTypes } from '@nativescript/core';
+import { Device, GestureTypes } from '@nativescript/core';
 import { confirm } from '@nativescript/core/ui/dialogs';
-import * as appversion from 'nativescript-appversion';
-import { Toasty } from 'nativescript-toasty';
+import * as appversion from '@nativescript/appversion';
+import { Toasty } from '@triniwiz/nativescript-toasty';
 
 import { addCellHighlight } from '@mobile/components/commons/animations';
 
@@ -152,7 +151,7 @@ export default {
         settingBufferMuteSound: bindSetting('buffers.mute_sound'),
     },
     created() {
-        this.deviceId = device.uuid;
+        this.deviceId = Device.uuid;
         setTimeout(async() => {
             const versionName = await appversion.getVersionName();
             const versionCode = await appversion.getVersionCode();

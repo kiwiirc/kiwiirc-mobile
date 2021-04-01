@@ -97,8 +97,8 @@
 <script>
 'kiwi public';
 
-import { AnimationCurve } from 'tns-core-modules/ui/enums';
-import { layout } from 'utils/utils';
+import { AnimationCurve } from '@nativescript/core/ui/enums';
+import { Utils } from '@nativescript/core';
 
 import { joinChannels } from '@mobile/libs/utils/channel';
 import SearchChannelPage from './SearchChannelPage';
@@ -154,7 +154,7 @@ export default {
             }
         },
         layoutLoaded(event) {
-            this.screenWidth = layout.toDeviceIndependentPixels(event.object.getMeasuredWidth());
+            this.screenWidth = Utils.layout.toDeviceIndependentPixels(event.object.getMeasuredWidth());
             const tabNickView = this.$refs['tab-nick'].nativeView;
             tabNickView.translateX = this.screenWidth;
             tabNickView.opacity = 0;

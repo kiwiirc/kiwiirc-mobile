@@ -4,7 +4,7 @@ import Vue from 'nativescript-vue';
 import _ from 'lodash';
 import EventEmitter from 'eventemitter3';
 import JSON5 from 'json5';
-import * as appversion from 'nativescript-appversion';
+import * as appversion from '@nativescript/appversion';
 
 import * as Misc from '@/helpers/Misc';
 import Logger from '@/libs/Logger';

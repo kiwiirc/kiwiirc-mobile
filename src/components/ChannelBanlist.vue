@@ -98,7 +98,7 @@
 'kiwi public';
 
 import { alert } from '@nativescript/core/ui/dialogs';
-import { isIOS } from 'tns-core-modules/platform';
+import { isIOS } from '@nativescript/core';
 
 export default {
     props: ['buffer'],

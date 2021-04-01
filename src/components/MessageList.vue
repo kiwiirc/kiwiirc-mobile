@@ -98,11 +98,10 @@
 'kiwi public';
 
 import _ from 'lodash';
-import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 import { setTimeout } from '@nativescript/core/timer';
-import { isIOS, isAndroid, GestureTypes } from '@nativescript/core';
+import { isIOS, isAndroid, GestureTypes, ObservableArray } from '@nativescript/core';
 import { Menu } from 'nativescript-menu';
-import { Toasty } from 'nativescript-toasty';
+import { Toasty } from '@triniwiz/nativescript-toasty';
 
 import * as bufferTools from '@/libs/bufferTools';
 import { createNickColour } from '@/helpers/TextFormatting';
@@ -419,12 +418,15 @@ export default {
                             this.$state.$emit('mediaviewer.show', action.value);
                             break;
                         case 'user':
-                            this.$state.$emit('userbox.show',
-                                action.value,
-                                {
-                                    network: this.network,
-                                    buffer: this.buffer,
-                                });
+                            // TODO: SHow a warning or something if this user no longer exists
+                            if (action.value) {
+                                this.$state.$emit('userbox.show',
+                                    action.value,
+                                    {
+                                        network: this.network,
+                                        buffer: this.buffer,
+                                    });
+                            }
                             break;
                         case 'channel':
                             this.$state.addBuffer(

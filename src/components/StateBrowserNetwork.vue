@@ -106,8 +106,18 @@ export default {
 
         /* global TNS_ENV */
         if (TNS_ENV !== 'production') {
+            let cnt = 0;
+            setInterval(() => {
+                let sec = cnt / 5;
+                cnt = 0;
+                if (sec > 5) {
+                    log('High message event rate on', this.network.name, sec + '/sec');
+                }
+            }, 5000);
+
             this.listen(this.network.ircClient, 'raw', (event) => {
-                log((event.from_server ? '[S] ' : '[C] ') + this.network.name + ' ' + event.line);
+                cnt++;
+                // log((event.from_server ? '[S] ' : '[C] ') + this.network.name + ' ' + event.line);
             });
         }
     },

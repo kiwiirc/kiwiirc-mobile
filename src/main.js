@@ -1,5 +1,5 @@
 import Vue from 'nativescript-vue';
-import VueDevtools from 'nativescript-vue-devtools';
+// import VueDevtools from 'nativescript-vue-devtools';
 
 import { isIOS, isAndroid, Application, Profiling } from '@nativescript/core';
 
@@ -9,7 +9,8 @@ import VueI18Next from '@panter/vue-i18next';
 import Logger from '@/libs/Logger';
 
 // global components
-import RadSideDrawer from 'nativescript-ui-sidedrawer/vue';
+import { install as drawerInstall } from '@nativescript-community/ui-drawer';
+import DrawerPlugin from '@nativescript-community/ui-drawer/vue'
 import LoaderPage from '@mobile/components/startups/LoaderPage';
 
 import AwayStatusIndicator from '@mobile/components/AwayStatusIndicator';
@@ -75,13 +76,11 @@ Vue.mixin({
 
 export function startApp() {
     Application.on(Application.uncaughtErrorEvent, (args) => {
-        console.log('main Application.uncaughtErrorEvent', args.eventName, args.error);
-        log.error(args.eventName, args.error);
+        console.log('[Application uncaughtErrorEvent]', args.eventName, args.error);
     });
 
     Vue.config.errorHandler = (err, vm, info) => {
-        console.log('main Vue.config.errorHandler', err.message + '\n' + err.stack);
-        log.error(err.message + '\n' + err.stack);
+        console.log('[Vue errorHandler]', err.message + '\n' + err.stack);
     };
 
     initLocalization();
@@ -90,7 +89,7 @@ export function startApp() {
     /* global TNS_ENV */
     if (TNS_ENV !== 'production') {
         // Vue.config.silent = false;
-        Vue.use(VueDevtools, { host: '192.168.1.211' });
+        // Vue.use(VueDevtools, { host: '192.168.1.211' });
     }
 
     console.log("$start app");
@@ -129,7 +128,8 @@ function loadGlobalComponents() {
     Vue.component('IconTextField', IconTextField);
     Vue.component('KiwiDropdown', KiwiDropdown);
 
-    Vue.use(RadSideDrawer);
+    Vue.use(DrawerPlugin);
+    drawerInstall();
 
     Vue.registerElement(
         'CheckBox',
@@ -141,12 +141,6 @@ function loadGlobalComponents() {
                 event: 'checkedChange',
             },
         }
-    );
-
-    Vue.registerElement(
-        'PullToRefresh',
-        // eslint-disable-next-line global-require
-        () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh
     );
 
     Vue.directive('dismissesIOSKeyboard', {

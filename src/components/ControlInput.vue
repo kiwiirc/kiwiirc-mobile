@@ -59,7 +59,7 @@
 'kiwi public';
 
 import _ from 'lodash';
-import { isIOS, isAndroid } from 'tns-core-modules/platform';
+import { isIOS, isAndroid } from '@nativescript/core';
 
 import Logger from '@/libs/Logger';
 import GlobalApi from '@mobile/libs/GlobalApi';
@@ -156,7 +156,12 @@ export default {
                     // eslint-disable-next-line global-require
                     const InputAccessoryView = require('./commons/InputAccessoryView')
                         .InputAccessoryView;
-                    textFieldView.ios.inputAccessoryView = InputAccessoryView.alloc().init({
+                    console.log('before init');
+                    // const test = { keyboardPositionChanged: (position) => {} }
+                    // const a = InputAccessoryView.alloc().init(test);
+                    // console.log('after init')
+                    textFieldView.ios.inputAccessoryView = InputAccessoryView.alloc().initWithFrame(CGRectZero);
+                    textFieldView.ios.inputAccessoryView.delegate = {
                         keyboardPositionChanged: (position) => {
                             if (!controlInputNativeView.ios.window) {
                                 return;
@@ -177,7 +182,7 @@ export default {
                                 translateY
                             );
                         },
-                    });
+                    };
                 }
 
                 // keep the keyboard after the user presses enter or send.
@@ -362,7 +367,6 @@ export default {
             };
         },
         blur() {
-            log('huhu when I hear heavy metal!');
             this.$refs.textInput.nativeView.dismissSoftInput();
             if (isIOS) {
                 this.$refs.textInput.nativeView.ios.resignFirstResponder();

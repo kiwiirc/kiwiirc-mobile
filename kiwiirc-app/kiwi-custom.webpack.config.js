@@ -3,7 +3,7 @@ const fs = require('fs');
 const fse = require('fs-extra');
 
 const webpack = require('webpack');
-const nsWebpack = require('nativescript-dev-webpack');
+const nsWebpack = require('@nativescript/webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const packageJson = require('./package.json');
@@ -81,6 +81,16 @@ module.exports = (env) => {
         loader: 'null-loader',
     });
 
+    // remove CleanWebpackPlugin because it is wrongly removing assets/ from the
+    // platforms folder.
+    // Probably a bug, probably will be fixed with the webpack 5 upgrade.
+    const indexOfCleanWebpackPlugin = config.plugins.findIndex(
+        p => p.constructor.name === 'CleanWebpackPlugin'
+    );
+    if (indexOfCleanWebpackPlugin !== -1) {
+        config.plugins.splice(indexOfCleanWebpackPlugin, 1);
+    }
+
     // config.plugins
     config.plugins.push(
         // fix irc framework import
@@ -96,7 +106,7 @@ module.exports = (env) => {
             'process.version': "''",
             'window.console': 'console',
         }),
-        new webpack.IgnorePlugin({resourceRegExp: /assets\/plugins/}),
+        new webpack.IgnorePlugin({ resourceRegExp: /assets\/plugins/ }),
     );
 
     // copy kiwiirc-mobile assets and fonts
